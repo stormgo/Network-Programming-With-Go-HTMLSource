@@ -1,0 +1,3 @@
+#!/bin/sh
+
+../GetHeadInfo localhost:80 | sed '/Date:/d'

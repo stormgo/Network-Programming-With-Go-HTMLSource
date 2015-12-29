@@ -1,0 +1,30 @@
+#!/bin/sh
+
+chapters="arch golang socket\
+          serialisation \
+          protocol \
+          charsets \
+          security \
+          http \
+          template \
+          chinese \
+          html xml \
+          rpc \
+          channel \
+          websockets"
+chaps=""
+for i in $chapters
+do 
+	chaps="$chaps dist/localhost/golang/$i/chapter-$i.html"
+done
+echo $chaps
+
+htmldoc -f book.pdf $chaps
+
+#chapters=`for i in $*
+#do
+#	echo -n "http://localhost/go/$i/chapter-$i.html "
+#done`
+#
+##wkhtmltopdf-i386 --use-xserver --header-right "[title]" --footer-center "Page [page]" --footer-left "Version 0.5"  --footer-right "©Jan Newmarch" --footer-font-size 9 http://localhost/go/index.html $chapters all.pdf
+#wkhtmltopdf-amd64 --use-xserver --header-right "[title]" --footer-center "Page [page]" --footer-left "Version 0.5"  --footer-right "©Jan Newmarch" --footer-font-size 9 http://localhost/go/index.html $chapters all.pdf

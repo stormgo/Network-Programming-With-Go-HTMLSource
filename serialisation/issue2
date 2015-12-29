@@ -1,0 +1,3 @@
+I'm not convinced by the packet vs stream argument.
+
+For example, if I wanted to build persistent Go objects, then I would need to save a representation of that object somewhere. ASN.1 and JSON don't cover the full range of Go data types. Gob is more complete, so I would expect to use a Gob representation. From the spec, "A stream of gobs is self-describing. Each data item in the stream is preceded by a specification of its type...". I have successfully saved and restored Go objects into/from files using the stream encoding to save and restore a packet of bytes into the file. But if I wanted to use a d/b for storage instead, I would want to use a blob of bytes, which I could get from marshalling/unmarshalling.

@@ -1,0 +1,123 @@
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.lang.reflect.*;
+
+public class GUIShell extends Frame implements KeyListener {
+
+    protected TextArea text;
+    protected PipedInputStream inPipe = new PipedInputStream();
+    protected PipedOutputStream outInPipe;
+    protected PrintStream outInStream;
+
+    protected PipedOutputStream outPipe = new PipedOutputStream();
+    protected PipedInputStream inOutPipe;
+    
+    protected PipedOutputStream errPipe = new PipedOutputStream();
+    protected PipedInputStream inErrPipe;
+
+    static public void main(String[] argv) {
+	GUIShell shell = new GUIShell(argv);
+	shell.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+          }
+        );
+	shell.setVisible(true);
+    }
+
+    public GUIShell(String[] argv) {
+        super("GetInetInfo");
+
+	try {
+	    outInPipe = new PipedOutputStream(inPipe);
+	    outInStream = new PrintStream(outInPipe);
+	    inOutPipe = new PipedInputStream(outPipe);
+	    inErrPipe = new PipedInputStream(errPipe);
+	} catch(IOException e) {
+	    System.err.println(e);
+	    System.exit(1);
+	}
+
+	text = new TextArea(10, 50);
+	add(text, BorderLayout.CENTER);
+	pack();
+
+	// System.setIn(inPipe);
+	System.setOut(new PrintStream(outPipe));
+	System.setErr(new PrintStream(errPipe));
+
+	// text.addKeyListener(this);
+
+	new ProcessReader(new BufferedReader(
+		      new InputStreamReader(inOutPipe))).start();
+	new ProcessReader(new BufferedReader(
+		      new InputStreamReader(inErrPipe))).start();
+
+	new RunProcess(argv).start();
+    }
+
+    public void keyTyped(KeyEvent evt) {
+	char ch = evt.getKeyChar();
+	outInStream.print(ch);
+    }
+
+    public void keyReleased(KeyEvent evt) {
+
+    }
+
+    public void keyPressed(KeyEvent evt) {
+
+    }
+
+    class RunProcess extends Thread {
+	String [] argv;
+
+	RunProcess(String[] argv) {
+	    this.argv = argv;
+	}
+
+	public void run() {
+	    // GetInetInfo.main(argv);
+            String guiShellFor = System.getProperty("guiShellFor");
+            try {
+                // Class cls = Class.forName("GetInetInfo");
+                Class cls = Class.forName(guiShellFor);
+                Method method = cls.getMethod("main",
+                                              new Class[] {argv.getClass()});
+                method.invoke(null, new Object[] {argv});
+            } catch(Exception e) {
+                System.err.println(e.toString());
+            }
+            
+            System.out.close();
+            System.err.close();
+	}
+    }
+
+    class ProcessReader extends Thread {
+	protected BufferedReader in;
+
+	ProcessReader(BufferedReader in) {
+	    this.in = in;
+	}
+
+	public void run() {
+	    String line;
+	    try {
+		while (true) {
+                    line = in.readLine();
+                    if ((line == null) || line.equals("")) {
+                        break;
+                    }
+		    text.append(line + "\n");
+		}
+	    } catch(IOException e) {
+                e.printStackTrace();
+		text.append("IO error " + e);
+	    }
+        }
+    }
+}

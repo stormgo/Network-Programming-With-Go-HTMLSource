@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+  <head>
+    <title>
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../stylesheet.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+      body { counter-reset: chapter 4; }
+    </style>
+
+    <script type="text/javascript" src="../toc.js"> 
+      <!-- empty -->
+    </script>
+
+    <script type="text/javascript">
+      /* <![CDATA[ */
+    (function() {
+        var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "http://api.flattr.com/js/0.6/load.js?mode=auto";
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+    </script>
+
+
+  </head>
+
+  <body>
+
+    <div class="chapter">
+      <h1> Cloud computing </h1>
+    </div>
+
+    <div class="preface">
+      <p>
+
+      </p>
+    </div>
+
+
+    <div id="generated-toc" class="generate_from_h2"></div>
+
+
+    <h2>Introduction</h2>
+    <p>
+      Cloud computing is the latest trend to come along, labelled by companies
+      such as Gartner as 
+      <a href="http://www.gartner.com/technology/topics/cloud-computing.jsp">
+	a distruptive phenomenon
+      </a>.
+      In one sense it is just out-sourcing in a different guise, but as such
+      it has particular advantages and disadvantages over earlier outsourcing
+      solutions.
+    </p>
+
+    <p>
+      Anyone who uses an email service such as Yahoo or Google mail is already
+      a "cloud user" although at the time they started using it, it probably
+      wasn't called that. These email services encapsulate many of the features
+      of cloud systems:
+      <ul>
+	<li>
+	  There is a single "point of entry", for example <code>http://gmail.google.com</code>
+	</li>
+	<li>
+	  It offers a web-based interface; other common access methods are apps
+	  for Apple or Android systems using some protocol (probably HTTP anyway)
+	</li>
+	<li>
+	  Yahoo and Google have hundreds of thousands of servers, but the user doesn't
+	  care about that: all that is required is that the service can scale up
+	  to manage as many users as is needed to the limits of the hardware
+	  available
+	</li>
+	<li>
+	  Users don't have to manage any of Yahoo's or Google's infrastructure,
+	  and as much as is possible, neither do these companies engineers:
+	  the software will scale up as needed
+	</li>
+	<li>
+	  The infrastructure that powers Google Mail also powers Google Docs,
+	  Google Slides, Google Sheets and so on. That is, the infrastructure
+	  allows many kinds of services to run and - within some important
+	  limits - is agnostic to the application that can be run
+	</li>
+      </ul>
+    </p>
+
+    <p>
+      This chapter curveys the current state of cloud services, with particular reference
+      to network programming. Later chapters look at how Go can be used in
+      cloud computing
+    </p>
+
+    <h2> "Something" as a service </h2>
+    <p>
+      There are a number of different ways of accessing "the cloud".
+      These are generally referred to "something as a service" where there
+      are a (growing) number of possible somethings. Currently they include
+      <ul>
+	<li>
+	  Infrastructure as a service (IaaS)
+	</li>
+	<li>
+	  Platfom as a service (PaaS)
+	</li>
+	<li>
+	  Software as a service (SaaS)
+	</li>
+	<li>
+	  Network as a service (NaaS)
+	</li>
+      </ul>      
+    </p>
+
+    <h3>  Infrastructure as a service (IaaS) </h3>
+    <p>
+      IaaS basically offers "computers" as a service. Most likely these
+      are virtual machines offered through a hypervisor such as KVM,
+      Xen or VMWare EXSI. A variety of operating systems can be installed
+      on these machines, and they can be further customised by installing
+      applications or configuring the system.
+    </p>
+
+    <p>
+      In that sense, IaaS just offers a machine that can be configured
+      to run applications of the programmer's choice.
+      The programming models discussed in previous chapters are not
+      affected by this: what is offered is maintenance, scalability, etc
+      of the server environment.
+    </p>
+
+    <p>
+      Examples include Amazon EC2 and Google Compute Engine.
+
+    <h3>  Platfom as a service (PaaS) </h3>
+    <p>
+      
+
+    <h3> Software as a service (SaaS) </h3>
+
+
+    <h3> Network as a service (NaaS) </h3>
+
+
+
+
+
+    <!--#exec cmd="/usr/local/bin/dataprogram.pl . ReadHTML.go" -->
+
+
+    <hr/>
+    <p> 
+      Copyright &copy; Jan Newmarch, jan@newmarch.name
+    </p>
+    <p>If you like this book, please contribute using Flattr
+      <a class="FlattrButton" style="display:none;"
+	 href="http://jan.newmarch.name/go/index.html"></a>
+      <br/> or donate using PayPal
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+						     ">
+	<input type="image" src="https://www.paypalobjects.com/WEBSCR-640-20110401-1/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+	<img alt="" border="0" src="https://www.paypalobjects.com/WEBSCR-640-20110401-1/en_AU/i/scr/pixel.gif" width="1" height="1">
+      </form>
+
+
+  </body>
+

@@ -1,0 +1,39 @@
+Several packages in Go involve serialisation: gob, asn1, json. But they have mutually inconsistent APIs, which could cause programmer errors down the track. Still time to fix them?
+
+1)
+json: func Marshal(v interface{}) ([]byte, os.Error)
+asn1: func MarshalToMemory(val interface{}) ([]byte, os.Error)
+gob: no function
+
+json and asn1 have different names for same functionality, missing in gob.
+
+2)
+asn1: func Marshal(out io.Writer, val interface{}) os.Error
+json: no equivalent
+gob: no equivalent
+xml: no equivalent
+
+Note same name but different parameter and return types for asn1.Marshal compared to json.Marshal
+
+3)
+asn1: func Unmarshal(val interface{}, b []byte) (rest []byte, err os.Error)
+json: func Unmarshal(data []byte, v interface{}) os.Error
+xml: func Unmarshal(r io.Reader, val interface{}) os.Error
+
+Parameters are swapped, result is different.
+
+4)
+json and gob have Decoder and Encoder, asn1 doesn't
+
+json: func NewDecoder(r io.Reader) *Decoder
+gob: func NewDecoder(r io.Reader) *Decoder
+asn1: none
+
+5)
+json: func (dec *Decoder) Decode(v interface{}) os.Error
+gob: func (dec *Decoder) Decode(e interface{}) os.Error
+asn1: none
+
+Summary:
+gob and json are almost identical, except json has additional Marshal/Unmarshal functions.
+asn1 is clearly at variance to both the others.

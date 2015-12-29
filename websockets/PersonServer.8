@@ -1,0 +1,411 @@
+go object linux 386 weekly.2011-10-06 9984
+  exports automatically generated from
+  PersonServer.go in package "main"
+
+$$  // exports
+    package main
+	import runtime "runtime"
+	import os "os"
+	import fmt "fmt"
+	import http "http"
+	import websocket "websocket"
+	type @"".Person struct { Name string; Emails []string }
+	type @"os".Error interface { String() string }
+	type @"websocket".Config struct { Location *@"url".URL; Origin *@"url".URL; Protocol []string; Version int; TlsConfig *@"crypto/tls".Config; handshakeData map[string] string }
+	import url "url" // indirect
+	type @"url".Values map[string] []string
+	func (v @"url".Values "noescape") Add (key string, value string)
+	func (v @"url".Values "noescape") Del (key string)
+	func (v @"url".Values "noescape") Encode () string
+	func (v @"url".Values "noescape") Get (key string "noescape") string
+	func (v @"url".Values "noescape") Set (key string, value string)
+	type @"url".URL struct { Raw string; Scheme string; RawAuthority string; RawUserinfo string; Host string; RawPath string; Path string; OpaquePath bool; RawQuery string; Fragment string }
+	func (u *@"url".URL "noescape") EncodedPath () string
+	func (url *@"url".URL "noescape") IsAbs () bool
+	func (base *@"url".URL "noescape") Parse (ref string) (? *@"url".URL, ? @"os".Error)
+	func (u *@"url".URL "noescape") Query () @"url".Values
+	func (base *@"url".URL "noescape") ResolveReference (ref *@"url".URL "noescape") *@"url".URL
+	func (url *@"url".URL "noescape") String () string
+	import tls "crypto/tls" // indirect
+	type @"crypto/tls".Certificate struct { Certificate [][]uint8; PrivateKey *@"crypto/rsa".PrivateKey; OCSPStaple []uint8 }
+	import rsa "crypto/rsa" // indirect
+	type @"crypto/rsa".PrivateKey struct { ? @"crypto/rsa".PublicKey; D *@"big".Int; Primes []*@"big".Int; Precomputed @"crypto/rsa".PrecomputedValues }
+	func (priv *@"crypto/rsa".PrivateKey "noescape") Precompute ()
+	func (priv *@"crypto/rsa".PrivateKey "noescape") Validate () @"os".Error
+	type @"crypto/rsa".PublicKey struct { N *@"big".Int; E int }
+	import big "big" // indirect
+	type @"fmt".State interface { Flag(c int) bool; Precision() (prec int, ok bool); Width() (wid int, ok bool); Write(b []uint8) (ret int, err @"os".Error) }
+	import rand "rand" // indirect
+	type @"rand".Rand struct { src @"rand".Source }
+	func (r *@"rand".Rand "noescape") ExpFloat64 () float64
+	func (r *@"rand".Rand "noescape") Float32 () float32
+	func (r *@"rand".Rand "noescape") Float64 () float64
+	func (r *@"rand".Rand "noescape") Int () int
+	func (r *@"rand".Rand "noescape") Int31 () int32
+	func (r *@"rand".Rand "noescape") Int31n (n int32) int32
+	func (r *@"rand".Rand "noescape") Int63 () int64
+	func (r *@"rand".Rand "noescape") Int63n (n int64) int64
+	func (r *@"rand".Rand "noescape") Intn (n int) int
+	func (r *@"rand".Rand "noescape") NormFloat64 () float64
+	func (r *@"rand".Rand "noescape") Perm (n int) []int
+	func (r *@"rand".Rand "noescape") Seed (seed int64)
+	func (r *@"rand".Rand "noescape") Uint32 () uint32
+	type @"rand".Source interface { Int63() int64; Seed(seed int64) }
+	type @"fmt".ScanState interface { Read(buf []uint8) (n int, err @"os".Error); ReadRune() (rune int, size int, err @"os".Error); SkipSpace(); Token(skipSpace bool, f func(? int) bool) (token []uint8, err @"os".Error); UnreadRune() @"os".Error; Width() (wid int, ok bool) }
+	import io "io" // indirect
+	type @"io".RuneScanner interface { ReadRune() (rune int, size int, err @"os".Error); UnreadRune() @"os".Error }
+	type @"big".Int struct { neg bool; abs @"big".nat }
+	func (z *@"big".Int) Abs (x *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Add (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) And (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) AndNot (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Binomial (n int64, k int64) *@"big".Int
+	func (z *@"big".Int "noescape") Bit (i int) uint
+	func (z *@"big".Int "noescape") BitLen () int
+	func (z *@"big".Int "noescape") Bytes () []uint8
+	func (x *@"big".Int "noescape") Cmp (y *@"big".Int "noescape") int
+	func (z *@"big".Int) Div (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) DivMod (x *@"big".Int "noescape", y *@"big".Int "noescape", m *@"big".Int) (? *@"big".Int, ? *@"big".Int)
+	func (z *@"big".Int) Exp (x *@"big".Int "noescape", y *@"big".Int "noescape", m *@"big".Int "noescape") *@"big".Int
+	func (x *@"big".Int "noescape") Format (s @"fmt".State, ch int)
+	func (z *@"big".Int "noescape") GobDecode (buf []uint8 "noescape") @"os".Error
+	func (z *@"big".Int "noescape") GobEncode () (? []uint8, ? @"os".Error)
+	func (x *@"big".Int "noescape") Int64 () int64
+	func (z *@"big".Int) Lsh (x *@"big".Int "noescape", n uint) *@"big".Int
+	func (z *@"big".Int) Mod (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) ModInverse (g *@"big".Int "noescape", p *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Mul (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) MulRange (a int64, b int64) *@"big".Int
+	func (z *@"big".Int) Neg (x *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Not (x *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Or (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Quo (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) QuoRem (x *@"big".Int "noescape", y *@"big".Int "noescape", r *@"big".Int) (? *@"big".Int, ? *@"big".Int)
+	func (z *@"big".Int) Rand (rnd *@"rand".Rand "noescape", n *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Rem (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Rsh (x *@"big".Int "noescape", n uint) *@"big".Int
+	func (z *@"big".Int) Scan (s @"fmt".ScanState, ch int) @"os".Error
+	func (z *@"big".Int) Set (x *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) SetBit (x *@"big".Int "noescape", i int, b uint) *@"big".Int
+	func (z *@"big".Int) SetBytes (buf []uint8 "noescape") *@"big".Int
+	func (z *@"big".Int) SetInt64 (x int64) *@"big".Int
+	func (z *@"big".Int) SetString (s string, base int) (? *@"big".Int, ? bool)
+	func (x *@"big".Int "noescape") Sign () int
+	func (x *@"big".Int "noescape") String () string
+	func (z *@"big".Int) Sub (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) Xor (x *@"big".Int "noescape", y *@"big".Int "noescape") *@"big".Int
+	func (z *@"big".Int) scan (r @"io".RuneScanner, base int) (? *@"big".Int, ? int, ? @"os".Error)
+	type @"big".Word uintptr
+	type @"big".nat []@"big".Word
+	func (z @"big".nat) add (x @"big".nat, y @"big".nat) @"big".nat
+	func (z @"big".nat) and (x @"big".nat "noescape", y @"big".nat "noescape") @"big".nat
+	func (z @"big".nat) andNot (x @"big".nat "noescape", y @"big".nat "noescape") @"big".nat
+	func (z @"big".nat "noescape") bit (i uint) uint
+	func (x @"big".nat "noescape") bitLen () int
+	func (z @"big".nat "noescape") bytes (buf []uint8 "noescape") int
+	func (z @"big".nat "noescape") clear ()
+	func (x @"big".nat "noescape") cmp (y @"big".nat "noescape") int
+	func (x @"big".nat "noescape") decimalString () string
+	func (z @"big".nat) div (z2 @"big".nat, u @"big".nat, v @"big".nat) (q @"big".nat, r @"big".nat)
+	func (z @"big".nat) divLarge (u @"big".nat, uIn @"big".nat, v @"big".nat) (q @"big".nat, r @"big".nat)
+	func (z @"big".nat) divW (x @"big".nat, y @"big".Word) (q @"big".nat, r @"big".Word)
+	func (z @"big".nat) expNN (x @"big".nat, y @"big".nat "noescape", m @"big".nat) @"big".nat
+	func (z @"big".nat) make (n int) @"big".nat
+	func (x @"big".nat) modW (d @"big".Word) @"big".Word
+	func (z @"big".nat) mul (x @"big".nat, y @"big".nat) @"big".nat
+	func (z @"big".nat) mulAddWW (x @"big".nat, y @"big".Word, r @"big".Word) @"big".nat
+	func (z @"big".nat) mulRange (a uint64, b uint64) @"big".nat
+	func (z @"big".nat) norm () @"big".nat
+	func (z @"big".nat) or (x @"big".nat "noescape", y @"big".nat "noescape") @"big".nat
+	func (x @"big".nat) powersOfTwoDecompose () (q @"big".nat, k int)
+	func (n @"big".nat) probablyPrime (reps int) bool
+	func (z @"big".nat) random (rand *@"rand".Rand "noescape", limit @"big".nat "noescape", n int) @"big".nat
+	func (z @"big".nat) scan (r @"io".RuneScanner, base int) (? @"big".nat, ? int, ? @"os".Error)
+	func (z @"big".nat) set (x @"big".nat "noescape") @"big".nat
+	func (z @"big".nat) setBit (x @"big".nat "noescape", i uint, b uint) @"big".nat
+	func (z @"big".nat) setBytes (buf []uint8 "noescape") @"big".nat
+	func (z @"big".nat) setUint64 (x uint64) @"big".nat
+	func (z @"big".nat) setWord (x @"big".Word) @"big".nat
+	func (z @"big".nat) shl (x @"big".nat, s uint) @"big".nat
+	func (z @"big".nat) shr (x @"big".nat, s uint) @"big".nat
+	func (x @"big".nat "noescape") string (charset string "noescape") string
+	func (z @"big".nat) sub (x @"big".nat, y @"big".nat) @"big".nat
+	func (z @"big".nat) xor (x @"big".nat "noescape", y @"big".nat "noescape") @"big".nat
+	type @"crypto/rsa".PrecomputedValues struct { Dp *@"big".Int; Dq *@"big".Int; Qinv *@"big".Int; CRTValues []@"crypto/rsa".CRTValue }
+	type @"crypto/rsa".CRTValue struct { Exp *@"big".Int; Coeff *@"big".Int; R *@"big".Int }
+	type @"io".Reader interface { Read(p []uint8) (n int, err @"os".Error) }
+	import x509 "crypto/x509" // indirect
+	import pkix "crypto/x509/pkix" // indirect
+	type @"crypto/x509/pkix".CertificateList struct { TBSCertList @"crypto/x509/pkix".TBSCertificateList; SignatureAlgorithm @"crypto/x509/pkix".AlgorithmIdentifier; SignatureValue @"asn1".BitString }
+	func (certList *@"crypto/x509/pkix".CertificateList "noescape") HasExpired (currentTimeSeconds int64) bool
+	type @"crypto/x509/pkix".TBSCertificateList struct { Raw @"asn1".RawContent; Version int "asn1:\"optional,default:2\""; Signature @"crypto/x509/pkix".AlgorithmIdentifier; Issuer @"crypto/x509/pkix".RDNSequence; ThisUpdate *@"time".Time; NextUpdate *@"time".Time; RevokedCertificates []@"crypto/x509/pkix".RevokedCertificate "asn1:\"optional\""; Extensions []@"crypto/x509/pkix".Extension "asn1:\"tag:0,optional,explicit\"" }
+	import asn1 "asn1" // indirect
+	type @"asn1".RawContent []uint8
+	type @"crypto/x509/pkix".AlgorithmIdentifier struct { Algorithm @"asn1".ObjectIdentifier; Parameters @"asn1".RawValue "asn1:\"optional\"" }
+	type @"asn1".ObjectIdentifier []int
+	func (oi @"asn1".ObjectIdentifier "noescape") Equal (other @"asn1".ObjectIdentifier "noescape") bool
+	type @"asn1".RawValue struct { Class int; Tag int; IsCompound bool; Bytes []uint8; FullBytes []uint8 }
+	type @"crypto/x509/pkix".RDNSequence []@"crypto/x509/pkix".RelativeDistinguishedNameSET
+	type @"crypto/x509/pkix".RelativeDistinguishedNameSET []@"crypto/x509/pkix".AttributeTypeAndValue
+	type @"crypto/x509/pkix".AttributeTypeAndValue struct { Type @"asn1".ObjectIdentifier; Value interface { } }
+	import time "time" // indirect
+	type @"time".Time struct { Year int64; Month int; Day int; Hour int; Minute int; Second int; Nanosecond int; ZoneOffset int; Zone string }
+	func (t *@"time".Time "noescape") Format (layout string) string
+	func (t *@"time".Time "noescape") Nanoseconds () int64
+	func (t *@"time".Time "noescape") Seconds () int64
+	func (t *@"time".Time "noescape") String () string
+	func (t *@"time".Time "noescape") Weekday () int
+	func (t *@"time".Time "noescape") parseNanoseconds (value string "noescape", nbytes int) (rangErrString string, err @"os".Error)
+	type @"crypto/x509/pkix".RevokedCertificate struct { SerialNumber *@"big".Int; RevocationTime *@"time".Time; Extensions []@"crypto/x509/pkix".Extension "asn1:\"optional\"" }
+	type @"crypto/x509/pkix".Extension struct { Id @"asn1".ObjectIdentifier; Critical bool "asn1:\"optional\""; Value []uint8 }
+	type @"asn1".BitString struct { Bytes []uint8; BitLength int }
+	func (b @"asn1".BitString "noescape") At (i int) int
+	func (b @"asn1".BitString) RightAlign () []uint8
+	type @"crypto/x509".SignatureAlgorithm int
+	type @"crypto/x509".VerifyOptions struct { DNSName string; Intermediates *@"crypto/x509".CertPool; Roots *@"crypto/x509".CertPool; CurrentTime int64 }
+	type @"crypto/x509".Certificate struct { Raw []uint8; RawTBSCertificate []uint8; RawSubjectPublicKeyInfo []uint8; Signature []uint8; SignatureAlgorithm @"crypto/x509".SignatureAlgorithm; PublicKeyAlgorithm @"crypto/x509".PublicKeyAlgorithm; PublicKey interface { }; Version int; SerialNumber *@"big".Int; Issuer @"crypto/x509/pkix".Name; Subject @"crypto/x509/pkix".Name; NotBefore *@"time".Time; NotAfter *@"time".Time; KeyUsage @"crypto/x509".KeyUsage; ExtKeyUsage []@"crypto/x509".ExtKeyUsage; UnknownExtKeyUsage []@"asn1".ObjectIdentifier; BasicConstraintsValid bool; IsCA bool; MaxPathLen int; SubjectKeyId []uint8; AuthorityKeyId []uint8; DNSNames []string; EmailAddresses []string; PermittedDNSDomainsCritical bool; PermittedDNSDomains []string; PolicyIdentifiers []@"asn1".ObjectIdentifier }
+	func (c *@"crypto/x509".Certificate "noescape") CheckCRLSignature (crl *@"crypto/x509/pkix".CertificateList "noescape") @"os".Error
+	func (c *@"crypto/x509".Certificate "noescape") CheckSignature (algo @"crypto/x509".SignatureAlgorithm, signed []uint8, signature []uint8) @"os".Error
+	func (c *@"crypto/x509".Certificate "noescape") CheckSignatureFrom (parent *@"crypto/x509".Certificate "noescape") @"os".Error
+	func (c *@"crypto/x509".Certificate "noescape") CreateCRL (rand @"io".Reader, priv *@"crypto/rsa".PrivateKey "noescape", revokedCerts []@"crypto/x509/pkix".RevokedCertificate, now *@"time".Time, expiry *@"time".Time) (crlBytes []uint8, err @"os".Error)
+	func (c *@"crypto/x509".Certificate "noescape") Equal (other *@"crypto/x509".Certificate "noescape") bool
+	func (c *@"crypto/x509".Certificate) Verify (opts @"crypto/x509".VerifyOptions) (chains [][]*@"crypto/x509".Certificate, err @"os".Error)
+	func (c *@"crypto/x509".Certificate) VerifyHostname (h string) @"os".Error
+	func (c *@"crypto/x509".Certificate) buildChains (cache map[int] [][]*@"crypto/x509".Certificate "noescape", currentChain []*@"crypto/x509".Certificate "noescape", opts *@"crypto/x509".VerifyOptions "noescape") (chains [][]*@"crypto/x509".Certificate, err @"os".Error)
+	func (c *@"crypto/x509".Certificate) isValid (certType int, opts *@"crypto/x509".VerifyOptions "noescape") @"os".Error
+	type @"crypto/x509".PublicKeyAlgorithm int
+	type @"crypto/x509/pkix".Name struct { Country []string; Organization []string; OrganizationalUnit []string; Locality []string; Province []string; StreetAddress []string; PostalCode []string; SerialNumber string; CommonName string }
+	func (n *@"crypto/x509/pkix".Name "noescape") FillFromRDNSequence (rdns *@"crypto/x509/pkix".RDNSequence "noescape")
+	func (n @"crypto/x509/pkix".Name) ToRDNSequence () @"crypto/x509/pkix".RDNSequence
+	type @"crypto/x509".KeyUsage int
+	type @"crypto/x509".ExtKeyUsage int
+	type @"crypto/x509".CertPool struct { bySubjectKeyId map[string] []int; byName map[string] []int; certs []*@"crypto/x509".Certificate }
+	func (s *@"crypto/x509".CertPool "noescape") AddCert (cert *@"crypto/x509".Certificate)
+	func (s *@"crypto/x509".CertPool "noescape") AppendCertsFromPEM (pemCerts []uint8) bool
+	func (s *@"crypto/x509".CertPool "noescape") findVerifiedParents (cert *@"crypto/x509".Certificate "noescape") []int
+	type @"crypto/tls".Config struct { Rand @"io".Reader; Time func() int64; Certificates []@"crypto/tls".Certificate; NameToCertificate map[string] *@"crypto/tls".Certificate; RootCAs *@"crypto/x509".CertPool; NextProtos []string; ServerName string; AuthenticateClient bool; CipherSuites []uint16 }
+	func (c *@"crypto/tls".Config "noescape") BuildNameToCertificate ()
+	func (c *@"crypto/tls".Config "noescape") cipherSuites () []uint16
+	func (c *@"crypto/tls".Config "noescape") getCertificateForName (name string) *@"crypto/tls".Certificate
+	func (c *@"crypto/tls".Config "noescape") rand () @"io".Reader
+	func (c *@"crypto/tls".Config "noescape") rootCAs () *@"crypto/x509".CertPool
+	func (c *@"crypto/tls".Config "noescape") time () int64
+	import net "net" // indirect
+	type @"net".Addr interface { Network() string; String() string }
+	type @"http".Cookie struct { Name string; Value string; Path string; Domain string; Expires @"time".Time; RawExpires string; MaxAge int; Secure bool; HttpOnly bool; Raw string; Unparsed []string }
+	func (c *@"http".Cookie "noescape") String () string
+	import multipart "mime/multipart" // indirect
+	type @"mime/multipart".File interface { Close() @"os".Error; Read(p []uint8) (n int, err @"os".Error); ReadAt(p []uint8, off int64) (n int, err @"os".Error); Seek(offset int64, whence int) (ret int64, err @"os".Error) }
+	type @"mime/multipart".FileHeader struct { Filename string; Header @"net/textproto".MIMEHeader; content []uint8; tmpfile string }
+	func (fh *@"mime/multipart".FileHeader "noescape") Open () (? @"mime/multipart".File, ? @"os".Error)
+	import textproto "net/textproto" // indirect
+	type @"net/textproto".MIMEHeader map[string] []string
+	func (h @"net/textproto".MIMEHeader "noescape") Add (key string, value string)
+	func (h @"net/textproto".MIMEHeader "noescape") Del (key string)
+	func (h @"net/textproto".MIMEHeader "noescape") Get (key string) string
+	func (h @"net/textproto".MIMEHeader "noescape") Set (key string, value string)
+	type @"mime/multipart".Part struct { Header @"net/textproto".MIMEHeader; buffer *@"bytes".Buffer; mr *@"mime/multipart".Reader; disposition string; dispositionParams map[string] string }
+	func (bp *@"mime/multipart".Part) Close () @"os".Error
+	func (p *@"mime/multipart".Part "noescape") FileName () string
+	func (p *@"mime/multipart".Part "noescape") FormName () string
+	func (bp *@"mime/multipart".Part "noescape") Read (p []uint8 "noescape") (n int, err @"os".Error)
+	func (p *@"mime/multipart".Part "noescape") parseContentDisposition ()
+	func (bp *@"mime/multipart".Part "noescape") populateHeaders () @"os".Error
+	import bytes "bytes" // indirect
+	type @"io".Writer interface { Write(p []uint8) (n int, err @"os".Error) }
+	type @"bytes".Buffer struct { buf []uint8; off int; runeBytes [4]uint8; bootstrap [64]uint8; lastRead @"bytes".readOp }
+	func (b *@"bytes".Buffer "noescape") Bytes () []uint8
+	func (b *@"bytes".Buffer "noescape") Len () int
+	func (b *@"bytes".Buffer "noescape") Next (n int) []uint8
+	func (b *@"bytes".Buffer "noescape") Read (p []uint8 "noescape") (n int, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") ReadByte () (c uint8, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") ReadBytes (delim uint8) (line []uint8, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") ReadFrom (r @"io".Reader) (n int64, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") ReadRune () (r int, size int, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") ReadString (delim uint8) (line string, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") Reset ()
+	func (b *@"bytes".Buffer "noescape") String () string
+	func (b *@"bytes".Buffer "noescape") Truncate (n int)
+	func (b *@"bytes".Buffer "noescape") UnreadByte () @"os".Error
+	func (b *@"bytes".Buffer "noescape") UnreadRune () @"os".Error
+	func (b *@"bytes".Buffer) Write (p []uint8 "noescape") (n int, err @"os".Error)
+	func (b *@"bytes".Buffer) WriteByte (c uint8) @"os".Error
+	func (b *@"bytes".Buffer) WriteRune (r int) (n int, err @"os".Error)
+	func (b *@"bytes".Buffer) WriteString (s string "noescape") (n int, err @"os".Error)
+	func (b *@"bytes".Buffer "noescape") WriteTo (w @"io".Writer) (n int64, err @"os".Error)
+	func (b *@"bytes".Buffer) grow (n int) int
+	type @"bytes".readOp int
+	type @"mime/multipart".Form struct { Value map[string] []string; File map[string] []*@"mime/multipart".FileHeader }
+	func (f *@"mime/multipart".Form "noescape") RemoveAll () @"os".Error
+	type @"mime/multipart".Reader struct { bufReader *@"bufio".Reader; currentPart *@"mime/multipart".Part; partsRead int; nl []uint8; nlDashBoundary []uint8; dashBoundaryDash []uint8; dashBoundary []uint8 }
+	func (mr *@"mime/multipart".Reader) NextPart () (? *@"mime/multipart".Part, ? @"os".Error)
+	func (r *@"mime/multipart".Reader) ReadForm (maxMemory int64) (f *@"mime/multipart".Form, err @"os".Error)
+	func (mr *@"mime/multipart".Reader "noescape") isBoundaryDelimiterLine (line []uint8 "noescape") bool
+	import bufio "bufio" // indirect
+	type @"bufio".Reader struct { buf []uint8; rd @"io".Reader; r int; w int; err @"os".Error; lastByte int; lastRuneSize int }
+	func (b *@"bufio".Reader "noescape") Buffered () int
+	func (b *@"bufio".Reader "noescape") Peek (n int) (? []uint8, ? @"os".Error)
+	func (b *@"bufio".Reader "noescape") Read (p []uint8) (n int, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") ReadByte () (c uint8, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") ReadBytes (delim uint8) (line []uint8, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") ReadLine () (line []uint8, isPrefix bool, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") ReadRune () (rune int, size int, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") ReadSlice (delim uint8) (line []uint8, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") ReadString (delim uint8) (line string, err @"os".Error)
+	func (b *@"bufio".Reader "noescape") UnreadByte () @"os".Error
+	func (b *@"bufio".Reader "noescape") UnreadRune () @"os".Error
+	func (b *@"bufio".Reader "noescape") fill ()
+	func (b *@"bufio".Reader "noescape") readErr () @"os".Error
+	type @"http".Request struct { Method string; RawURL string; URL *@"url".URL; Proto string; ProtoMajor int; ProtoMinor int; Header @"http".Header; Body @"io".ReadCloser; ContentLength int64; TransferEncoding []string; Close bool; Host string; Form @"url".Values; MultipartForm *@"mime/multipart".Form; Trailer @"http".Header; RemoteAddr string; TLS *@"crypto/tls".ConnectionState }
+	func (r *@"http".Request "noescape") AddCookie (c *@"http".Cookie "noescape")
+	func (r *@"http".Request "noescape") Cookie (name string "noescape") (? *@"http".Cookie, ? @"os".Error)
+	func (r *@"http".Request "noescape") Cookies () []*@"http".Cookie
+	func (r *@"http".Request "noescape") FormFile (key string "noescape") (? @"mime/multipart".File, ? *@"mime/multipart".FileHeader, ? @"os".Error)
+	func (r *@"http".Request "noescape") FormValue (key string "noescape") string
+	func (r *@"http".Request "noescape") MultipartReader () (? *@"mime/multipart".Reader, ? @"os".Error)
+	func (r *@"http".Request "noescape") ParseForm () @"os".Error
+	func (r *@"http".Request "noescape") ParseMultipartForm (maxMemory int64) @"os".Error
+	func (r *@"http".Request "noescape") ProtoAtLeast (major int, minor int) bool
+	func (r *@"http".Request "noescape") Referer () string
+	func (r *@"http".Request "noescape") SetBasicAuth (username string "noescape", password string "noescape")
+	func (r *@"http".Request "noescape") UserAgent () string
+	func (req *@"http".Request) Write (w @"io".Writer) @"os".Error
+	func (req *@"http".Request) WriteProxy (w @"io".Writer) @"os".Error
+	func (req *@"http".Request) dumpWrite (w @"io".Writer) @"os".Error
+	func (r *@"http".Request "noescape") expectsContinue () bool
+	func (r *@"http".Request "noescape") multipartReader () (? *@"mime/multipart".Reader, ? @"os".Error)
+	func (r *@"http".Request "noescape") wantsHttp10KeepAlive () bool
+	func (req *@"http".Request) write (w @"io".Writer, usingProxy bool) @"os".Error
+	type @"http".Header map[string] []string
+	func (h @"http".Header "noescape") Add (key string, value string)
+	func (h @"http".Header "noescape") Del (key string)
+	func (h @"http".Header "noescape") Get (key string) string
+	func (h @"http".Header "noescape") Set (key string, value string)
+	func (h @"http".Header "noescape") Write (w @"io".Writer) @"os".Error
+	func (h @"http".Header "noescape") WriteSubset (w @"io".Writer, exclude map[string] bool "noescape") @"os".Error
+	type @"io".ReadCloser interface { Close() @"os".Error; Read(p []uint8) (n int, err @"os".Error) }
+	type @"crypto/tls".ConnectionState struct { HandshakeComplete bool; CipherSuite uint16; NegotiatedProtocol string; NegotiatedProtocolIsMutual bool; ServerName string; PeerCertificates []*@"crypto/x509".Certificate; VerifiedChains [][]*@"crypto/x509".Certificate }
+	type @"websocket".Conn struct { config *@"websocket".Config; request *@"http".Request; buf *@"bufio".ReadWriter; rwc @"io".ReadWriteCloser; rio @"sync".Mutex; ? @"websocket".frameReaderFactory; ? @"websocket".frameReader; wio @"sync".Mutex; ? @"websocket".frameWriterFactory; ? @"websocket".frameHandler; PayloadType uint8; defaultCloseStatus int }
+	func (ws *@"websocket".Conn "noescape") Close () @"os".Error
+	func (ws *@"websocket".Conn "noescape") Config () *@"websocket".Config
+	func (ws *@"websocket".Conn "noescape") IsClientConn () bool
+	func (ws *@"websocket".Conn "noescape") IsServerConn () bool
+	func (ws *@"websocket".Conn "noescape") LocalAddr () @"net".Addr
+	func (ws *@"websocket".Conn) Read (msg []uint8) (n int, err @"os".Error)
+	func (ws *@"websocket".Conn "noescape") RemoteAddr () @"net".Addr
+	func (ws *@"websocket".Conn "noescape") Request () *@"http".Request
+	func (ws *@"websocket".Conn "noescape") SetReadTimeout (nsec int64) @"os".Error
+	func (ws *@"websocket".Conn "noescape") SetTimeout (nsec int64) @"os".Error
+	func (ws *@"websocket".Conn "noescape") SetWriteTimeout (nsec int64) @"os".Error
+	func (ws *@"websocket".Conn) Write (msg []uint8) (n int, err @"os".Error)
+	type @"bufio".ReadWriter struct { ? *@"bufio".Reader; ? *@"bufio".Writer }
+	type @"bufio".Writer struct { err @"os".Error; buf []uint8; n int; wr @"io".Writer }
+	func (b *@"bufio".Writer "noescape") Available () int
+	func (b *@"bufio".Writer "noescape") Buffered () int
+	func (b *@"bufio".Writer "noescape") Flush () @"os".Error
+	func (b *@"bufio".Writer "noescape") Write (p []uint8) (nn int, err @"os".Error)
+	func (b *@"bufio".Writer "noescape") WriteByte (c uint8) @"os".Error
+	func (b *@"bufio".Writer "noescape") WriteRune (rune int) (size int, err @"os".Error)
+	func (b *@"bufio".Writer "noescape") WriteString (s string "noescape") (? int, ? @"os".Error)
+	type @"io".ReadWriteCloser interface { Close() @"os".Error; Read(p []uint8) (n int, err @"os".Error); Write(p []uint8) (n int, err @"os".Error) }
+	import sync "sync" // indirect
+	type @"sync".Mutex struct { state int32; sema uint32 }
+	func (m *@"sync".Mutex) Lock ()
+	func (m *@"sync".Mutex) Unlock ()
+	type @"websocket".frameReaderFactory interface { NewFrameReader() (r @"websocket".frameReader, err @"os".Error) }
+	type @"websocket".frameReader interface { HeaderReader() @"io".Reader; Len() int; PayloadType() uint8; Read(p []uint8) (n int, err @"os".Error); TrailerReader() @"io".Reader }
+	type @"websocket".frameWriterFactory interface { NewFrameWriter(payloadType uint8) (w @"websocket".frameWriter, err @"os".Error) }
+	type @"websocket".frameWriter interface { Close() @"os".Error; Write(p []uint8) (n int, err @"os".Error) }
+	type @"websocket".frameHandler interface { HandleFrame(frame @"websocket".frameReader) (r @"websocket".frameReader, err @"os".Error); WriteClose(status int) @"os".Error }
+	func @"".Echo (ws *@"websocket".Conn)
+	func @"".main ()
+	func @"".checkError (err @"os".Error)
+	var @"".initdoneÂ· uint8
+	func @"".init ()
+
+$$  // local types
+
+$$
+
+!
+ E</  E<home  E<httpd  E<html  E<go  E<websockets  E<PersonServer.go 7       E<fmt.a 7     ÿÿÿÿA E<http.a 7     ÿÿÿÿA E<os.a 7     ÿÿÿÿA E<websocket.a 7 
+    ÿÿÿÿA7 .      ="".Echo  =type.func(*websocket.Conn) Þ    ‘=E„      Aq       AS =runtime.new  =type.func(int32) *"".Person      ‘=q       S =type.*"".Person  =type.uint8  Sruntime.typ q    “= DS ?"".&person q    ¤ÿÿÿ? S	runtime.elem q       	S =
+runtime.convT2E  =type.func(*uint8, *"".Person) interface { }      ‘
+=b       Sq    q     Swebsocket.v b       SÒ      	       A	       Aq       A	£      z      !       =websocket.JSON  =type.websocket.Codec b    ‘= Swebsocket.cd b    S!      z      z       @"".ws  =type.*websocket.Conn q    ‘@ Swebsocket.ws q       S =websocket.Codec.Receive      =b       Sq     ?"".err  =type.os.Error b    •¬ÿÿÿ?!      z      z      b    •¬ÿÿÿ?&    RAP     B   <q    A ?"".autotmp_0003 b    äÿÿÿ?Õ      Õ      b    äÿÿÿ? ?"".autotmp_0001 q       AÄÿÿÿ?q       AÈÿÿÿ?q    Àÿÿÿ? =type.string q    “= DS =go.string."Can't receive" b    =b       	S!      z      z       =type.func(*uint8, string) interface { }      ‘
+=b       Sq    b    Àÿÿÿ?q    R!      z      z      b    Àÿÿÿ? Sfmt.a b    S!      z      z      z       =fmt.Println  =type.func(...interface { }) (int, os.Error)      ‘=X     ³   <q    A ?"".autotmp_0006 b    œÿÿÿ?Õ      Õ      b    œÿÿÿ? ?"".autotmp_0004 q       A¸ÿÿÿ?q       A¼ÿÿÿ?q    ´ÿÿÿ?q       AS = go.string."Name: " b     =b       S!      z      z      q    ¤ÿÿÿ?b       S!      z      z       =!runtime.concatstring  ="type.func(int, string, string) string      ‘!="b       Sq    b       	S!      z      z      q    “= DS     ‘
+=b       Sq    b    ´ÿÿÿ?q    R!      z      z      b    ´ÿÿÿ?b    S!      z      z      z           ‘=q    ¤ÿÿÿ?	       A ?#"".autotmp_0007 b    Øÿÿÿ#?!      z      z      z      q    A
+q    Üÿÿÿ#? ?$"".autotmp_0009 q    Ìÿÿÿ$?b    Øÿÿÿ#?q    RX     z   <C     
+q    Ìÿÿÿ$?&    
+Q     ³   < ?%"".autotmp_0008 q    
+˜ÿÿÿ%?q     ?&"".e b    •Ðÿÿÿ&?!      z      z      q    	       A ?'"".autotmp_0010 q    ¨ÿÿÿ'?q    A ?("".autotmp_0013 b    øÿÿÿ(?Õ      Õ      b    øÿÿÿ(? ?)"".autotmp_0011 q       Aðÿÿÿ)?q       Aôÿÿÿ)?q    ìÿÿÿ)?q       AS =*go.string."An email: " b    *=b       S!      z      z      b    •Ðÿÿÿ&?b       S!      z      z           ‘!="b       Sq    b       	S!      z      z      q    “= DS     ‘
+=b       Sq    b    ìÿÿÿ)?q    R!      z      z      b    ìÿÿÿ)?b    S!      z      z      z           ‘=q    ¨ÿÿÿ'?q    ˜ÿÿÿ%?
+X     y   <¥       =+"".main  =,type.func() Þ     ‘+=,    A =-type.websocket.Handler q "   “= -DS =.type.http.Handler  S/runtime.typ2 q "   “= .D   /Sq "   “= Dq "      	S =0runtime.convT2I  =1type.func(*uint8, *uint8, websocket.Handler) http.Handler  "    ‘0=1b "      Sq "    Shttp.handler b "      S! "     z "     z "      =go.string."/" b "   = Shttp.pattern b "   S! "     z "     z "      =http.Handle  =type.func(string, http.Handler)  "    ‘= =go.string.":12345" b #   = Shttp.addr b #   S! #     z #     z #     q #   Ab #      SÕ #     Õ #      =http.ListenAndServe  =	type.func(string, http.Handler) os.Error  #    ‘=	b #      Sq #   b #   •øÿÿÿ?! #     z #     z #     b $   •øÿÿÿ? S
+"".err b $   
+S! $     z $     z $      ="".checkError  =type.func(os.Error)  $    ‘=¥ %     Þ '   ‘=E4      A @"".err b (   ‘@& (   RAP (      <q )   A ?"".autotmp_0069 b )   ðÿÿÿ?q )      A	£ )     Õ )     b )   ðÿÿÿ? ?"".autotmp_0067 q )      Aèÿÿÿ?q )      Aìÿÿÿ?q )   äÿÿÿ? =type.uint8  Sruntime.typ q )   “= DS =go.string."Fatal error " b )   = Sruntime.elem b )      S! )     z )     z )      =runtime.convT2E  )    ‘=b )      Sq )   b )   äÿÿÿ?q )   R! )     z )     z )     b )   ‘@q )      Rq )   Sq )   Rq )      R )    b )      Sq )   b )      S! )     z )     z )     q )   “= DS )    ‘=b )      Sq )   b )   äÿÿÿ?q )   R	 )      A! )     z )     z )     b )   äÿÿÿ?b )   S! )     z )     z )     z )      )    ‘= Sos.code q *      AS =os.Exit  =type.func(int)  *    ‘=¥ ,      ="".init Þ ,   ‘=,A ="".initdoneÂ· t ,   ‘=	% ,   	AP ,    !  <q ,   	% ,   	   AY ,       <¥ ,      =runtime.throwinit  ,    ‘=,p ,      A‘= =websocket.init  ,    ‘=, =os.init  ,    ‘=, =http.init  ,    ‘=, =fmt.init  ,    ‘=,p ,      A‘=¥ ,      =go.string."Can't receive" -    ;==    D-    ;   =   A-    ;   = Can't re-    ;   = ceive   -    ;   =A5    ;
+=   A-    ; ==     D-    ;    =   A-    ;    = Name:   -    ;    =A5    ;
+ =   A-    ;*==    *D-    ;   *=
+   A-    ;   *= An email-    ;   *= :       -    ;   *=A5    ;
+*=   A- "   ;==    D- "   ;   =   A- "   ;   = /       - "   ;	   =A5 "   ;
+=   A- #   ;==    D- #   ;   =   A- #   ;   = :12345  - #   ;   =A5 #   ;
+=   A- )   ;==    D- )   ;   =   A- )   ;   = Fatal er- )   ;   = ror     - )   ;   =A5 )   ;
+=   A5 ,   ‘=     A = type.[]string  =!type.*runtime.SliceType - ,   ; == !D- ,   ;    ==     D- ,   ;    =   A- ,   ;    =Ó¨ó
+A- ,   ;    =   A- ,   ;    =   A- ,   ;    =   A- ,   ;    =   A ="go.string."[]string" - ,   ;    == "D- ,   ;"==    "D- ,   ;   "=   A- ,   ;   "= []string- ,   ;   "=A5 ,   ;
+"=   A =#weak.type.*[]string - ,   ;    == #D =$type.string - ,   ;     == $D5 ,   ;
+ =$   A =%type."".Person  =&type.*runtime.StructType - ,   ;%== &D- ,   ;   %==    %D- ,   ;   %=   A- ,   ;   %=ýÏ‘A- ,   ;   %=   A- ,   ;   %=   A- ,   ;   %=   A- ,   ;   %=   A ='go.string."main.Person" - ,   ;   %== 'D- ,   ;'==    'D- ,   ;   '=   A- ,   ;   '= main.Per- ,   ;   '= son     - ,   ;   '=A5 ,   ;
+'=   A =(type.*"".Person - ,   ;   %== (D- ,   ;    %== ,   %D- ,   ;$   %=   A- ,   ;(   %=   A =)go.string."Name" - ,   ;,   %== )D- ,   ;)==    )D- ,   ;   )=   A- ,   ;   )= Name    - ,   ;   )=A5 ,   ;
+)=   A- ,   ;0   %=A- ,   ;4   %== $D- ,   ;8   %=A- ,   ;<   %=A =*go.string."Emails" - ,   ;@   %== *D- ,   ;*==    *D- ,   ;   *=   A- ,   ;   *= Emails  - ,   ;   *=A5 ,   ;
+*=   A- ,   ;D   %=A- ,   ;H   %==  D- ,   ;L   %=A- ,   ;P   %=   A- ,   ;   %== T   %D =+go.string."Person" - ,   ;T   %== +D- ,   ;+==    +D- ,   ;   +=   A- ,   ;   += Person  - ,   ;   +=A5 ,   ;
++=   A =,go.importpath."". - ,   ;X   %== ,D- ,   ;\   %== h   %D- ,   ;`   %=A- ,   ;d   %=A5 ,   ;%=h   A =-type.*runtime.PtrType - ,   ;(== -D- ,   ;   (==    (D- ,   ;   (=   A- ,   ;   (=‘pA- ,   ;   (=   A- ,   ;   (=   A- ,   ;   (=   A- ,   ;   (=   A =.go.string."*main.Person" - ,   ;   (== .D- ,   ;.==    .D- ,   ;   .=   A- ,   ;   .= *main.Pe- ,   ;   .= rson    - ,   ;   .=A5 ,   ;
+.=   A =/weak.type.**"".Person - ,   ;   (== /D- ,   ;    (== %D5 ,   ;(=$   A =0type.func(*websocket.Conn)  =1type.*runtime.FuncType - ,   ;0== 1D- ,   ;   0==    0D- ,   ;   0=   A- ,   ;   0=¬‡UA- ,   ;   0=   A- ,   ;   0=   A- ,   ;   0=   A- ,   ;   0=   A =go.string."func(*websocket.Conn)" - ,   ;   0== D- ,   ;==    D- ,   ;   =   A- ,   ;   = func(*we- ,   ;   = bsocket.- ,   ;   = Conn)   - ,   ;   =A5 ,   ;
+=    A =weak.type.*func(*websocket.Conn) - ,   ;   0== D- ,   ;    0=A- ,   ;$   0== <   0D- ,   ;(   0=   A- ,   ;,   0=   A- ,   ;0   0== @   0D- ,   ;4   0=A- ,   ;8   0=A =type.*websocket.Conn - ,   ;<   0== D5 ,   ;
+0=@   A =type.func(int32) *"".Person - ,   ;== 1D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =Æ«¢…A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."func(int32) *main.Person" - ,   ;   == D- ,   ;==    D- ,   ;   =   A- ,   ;   = func(int- ,   ;   = 32) *mai- ,   ;   = n.Person- ,   ;    =A5 ,   ;
+=$   A =weak.type.*func(int32) *"".Person - ,   ;   == D- ,   ;    =A- ,   ;$   == <   D- ,   ;(   =   A- ,   ;,   =   A- ,   ;0   == @   D- ,   ;4   =   A- ,   ;8   =   A =type.int32 - ,   ;<   == D- ,   ;@   == (D5 ,   ;
+=D   A =type.interface { }  =	type.*runtime.InterfaceType - ,   ;== 	D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =ô¤BóA- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =
+go.string."interface { }" - ,   ;   == 
+D- ,   ;
+==    
+D- ,   ;   
+=   A- ,   ;   
+= interfac- ,   ;   
+= e { }   - ,   ;   
+=A5 ,   ;
+
+=   A =weak.type.*interface { } - ,   ;   == D- ,   ;    == ,   D- ,   ;$   =A- ,   ;(   =A5 ,   ;
+=,   A =type.func(*uint8, *"".Person) interface { } - ,   ;== 1D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =Ã”‘2A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."func(*uint8, *main.Person) interface { }" - ,   ;   == D- ,   ;==    D- ,   ;   =(   A- ,   ;   = func(*ui- ,   ;   = nt8, *ma- ,   ;   = in.Perso- ,   ;    = n) inter- ,   ;(   = face { }- ,   ;0   =A5 ,   ;
+=4   A =weak.type.*func(*uint8, *"".Person) interface { } - ,   ;   == D- ,   ;    =A- ,   ;$   == <   D- ,   ;(   =   A- ,   ;,   =   A- ,   ;0   == D   D- ,   ;4   =   A- ,   ;8   =   A =type.*uint8 - ,   ;<   == D- ,   ;@   == (D- ,   ;D   == D5 ,   ;
+=H   A =type.func(*uint8, string) interface { } - ,   ;== 1D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =ï¤)¤A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."func(*uint8, string) interface { }" - ,   ;   == D- ,   ;==    D- ,   ;   ="   A- ,   ;   = func(*ui- ,   ;   = nt8, str- ,   ;   = ing) int- ,   ;    = erface {- ,   ;(   =  }      - ,   ;*   =A5 ,   ;
+=,   A =weak.type.*func(*uint8, string) interface { } - ,   ;   == D- ,   ;    =A- ,   ;$   == <   D- ,   ;(   =   A- ,   ;,   =   A- ,   ;0   == D   D- ,   ;4   =   A- ,   ;8   =   A- ,   ;<   == D- ,   ;@   == $D- ,   ;D   == D5 ,   ;
+=H   A =type.[]interface { } - ,   ;== !D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =6ûýlA- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."[]interface { }" - ,   ;   == D- ,   ;==    D- ,   ;   =   A- ,   ;   = []interf- ,   ;   = ace { } - ,   ;   =A5 ,   ;
+=   A =weak.type.*[]interface { } - ,   ;   == D- ,   ;    == D5 ,   ;
+=$   A =type.func(...interface { }) (int, os.Error) - ,   ;== 1D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =P['‘A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."func(...interface { }) (int, os.Error)" - ,   ;   == D- ,   ;==    D- ,   ;   =&   A- ,   ;   = func(...- ,   ;   = interfac- ,   ;   = e { }) (- ,   ;    = int, os.- ,   ;(   = Error)  - ,   ;.   =A5 ,   ;
+=0   A =weak.type.*func(...interface { }) (int, os.Error) - ,   ;   == D- ,   ;    =   A- ,   ;$   == <   D- ,   ;(   =   A- ,   ;,   =   A- ,   ;0   == @   D- ,   ;4   =   A- ,   ;8   =   A- ,   ;<   == D =type.int - ,   ;@   == D =type.os.Error - ,   ;D   == D5 ,   ;
+=H   A =type.func(int, string, string) string - ,   ;== 1D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =`—ÅØA- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."func(int, string, string) string" - ,   ;   == D- ,   ;==    D- ,   ;   =    A- ,   ;   = func(int- ,   ;   = , string- ,   ;   = , string- ,   ;    = ) string- ,   ;(   =A5 ,   ;
+=,   A =weak.type.*func(int, string, string) string - ,   ;   == D- ,   ;    =A- ,   ;$   == <   D- ,   ;(   =   A- ,   ;,   =   A- ,   ;0   == H   D- ,   ;4   =   A- ,   ;8   =   A- ,   ;<   == D- ,   ;@   == $D- ,   ;D   == $D- ,   ;H   == $D5 ,   ;
+=L   A =type.func() - ,   ;== 1D- ,   ;   ==    D- ,   ;   =   A- ,   ;   =ö¼‚öA- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A- ,   ;   =   A =go.string."func()" - ,   ;   == D- ,   ;==    D- ,   ;   =   A- ,   ;   = func()  - ,   ;   =A5 ,   ;
+=   A = weak.type.*func() - ,   ;   ==  D- ,   ;    =A- ,   ;$   == <   D- ,   ;(   =A- ,   ;,   =A- ,   ;0   == <   D- ,   ;4   =A- ,   ;8   =A5 ,   ;
+=<   A =!type.func(*uint8, *uint8, websocket.Handler) http.Handler - ,   ;!== 1D- ,   ;   !==    !D- ,   ;   !=   A- ,   ;   !==gzA- ,   ;   !=   A- ,   ;   !=   A- ,   ;   !=   A- ,   ;   !=   A ="go.string."func(*uint8, *uint8, websocket.Handler) http.Handler" - ,   ;   !== "D- ,   ;"==    "D- ,   ;   "=4   A- ,   ;   "= func(*ui- ,   ;   "= nt8, *ui- ,   ;   "= nt8, web- ,   ;    "= socket.H- ,   ;(   "= andler) - ,   ;0   "= http.Han- ,   ;8   "= dler    - ,   ;<   "=A5 ,   ;
+"=@   A =#weak.type.*func(*uint8, *uint8, websocket.Handler) http.Handler - ,   ;   !== #D- ,   ;    !=A- ,   ;$   !== <   !D- ,   ;(   !=   A- ,   ;,   !=   A- ,   ;0   !== H   !D- ,   ;4   !=   A- ,   ;8   !=   A- ,   ;<   !== D- ,   ;@   !== D =$type.websocket.Handler - ,   ;D   !== $D =%type.http.Handler - ,   ;H   !== %D5 ,   ;
+!=L   A =&type.func(string, http.Handler) - ,   ;&== 1D- ,   ;   &==    &D- ,   ;   &=   A- ,   ;   &=)m¶A- ,   ;   &=   A- ,   ;   &=   A- ,   ;   &=   A- ,   ;   &=   A ='go.string."func(string, http.Handler)" - ,   ;   &== 'D- ,   ;'==    'D- ,   ;   '=   A- ,   ;   '= func(str- ,   ;   '= ing, htt- ,   ;   '= p.Handle- ,   ;    '= r)      - ,   ;"   '=A5 ,   ;
+'=$   A =(weak.type.*func(string, http.Handler) - ,   ;   &== (D- ,   ;    &=A- ,   ;$   &== <   &D- ,   ;(   &=   A- ,   ;,   &=   A- ,   ;0   &== D   &D- ,   ;4   &=A- ,   ;8   &=A =)type.string - ,   ;<   &== )D- ,   ;@   &== %D5 ,   ;
+&=D   A =*type.func(string, http.Handler) os.Error - ,   ;*== 1D- ,   ;   *==    *D- ,   ;   *=   A- ,   ;   *=sÕ›SA- ,   ;   *=   A- ,   ;   *=   A- ,   ;   *=   A- ,   ;   *=   A =+go.string."func(string, http.Handler) os.Error" - ,   ;   *== +D- ,   ;+==    +D- ,   ;   +=#   A- ,   ;   += func(str- ,   ;   += ing, htt- ,   ;   += p.Handle- ,   ;    += r) os.Er- ,   ;(   += ror     - ,   ;+   +=A5 ,   ;
++=,   A =,weak.type.*func(string, http.Handler) os.Error - ,   ;   *== ,D- ,   ;    *=A- ,   ;$   *== <   *D- ,   ;(   *=   A- ,   ;,   *=   A- ,   ;0   *== D   *D- ,   ;4   *=   A- ,   ;8   *=   A- ,   ;<   *== )D- ,   ;@   *== %D- ,   ;D   *== D5 ,   ;
+*=H   A =-type.func(os.Error) - ,   ;-== 1D- ,   ;   -==    -D- ,   ;   -=   A- ,   ;   -=·þ¯A- ,   ;   -=   A- ,   ;   -=   A- ,   ;   -=   A- ,   ;   -=   A =.go.string."func(os.Error)" - ,   ;   -== .D- ,   ;.==    .D- ,   ;   .=   A- ,   ;   .= func(os.- ,   ;   .= Error)  - ,   ;   .=A5 ,   ;
+.=   A =/weak.type.*func(os.Error) - ,   ;   -== /D- ,   ;    -=A- ,   ;$   -== <   -D- ,   ;(   -=   A- ,   ;,   -=   A- ,   ;0   -== @   -D- ,   ;4   -=A- ,   ;8   -=A- ,   ;<   -== D5 ,   ;
+-=@   A =0type.func(int) - ,   ;0== 1D- ,   ;   0==    0D- ,   ;   0=   A- ,   ;   0=„æñA- ,   ;   0=   A- ,   ;   0=   A- ,   ;   0=   A- ,   ;   0=   A =1go.string."func(int)" - ,   ;   0== 1D- ,   ;1==    1D- ,   ;   1=	   A- ,   ;   1= func(int- ,   ;   1= )       - ,   ;   1=A5 ,   ;
+1=   A =weak.type.*func(int) - ,   ;   0== D- ,   ;    0=A- ,   ;$   0== <   0D- ,   ;(   0=   A- ,   ;,   0=   A- ,   ;0   0== @   0D- ,   ;4   0=A- ,   ;8   0=A- ,   ;<   0== D5 ,   ;
+0=@   A =go.importpath.runtime.  =go.string."runtime" - ,   ;==    D- ,   ;==    D- ,   ;   =   A- ,   ;   = runtime - ,   ;   =A5 ,   ;
+=   A- ,   ;   =   A5 ,   ;
+=   A =go.importpath.os.  =go.string."os" - ,   ;==    D- ,   ;==    D- ,   ;   =   A- ,   ;   = os      - ,   ;
+   =A5 ,   ;
+=   A- ,   ;   =   A5 ,   ;
+=   A =go.importpath.fmt.  =go.string."fmt" - ,   ;==    D- ,   ;==    D- ,   ;   =   A- ,   ;   = fmt     - ,   ;   =A5 ,   ;
+=   A- ,   ;   =   A5 ,   ;
+=   A =go.importpath.http.  =	go.string."http" - ,   ;==    	D- ,   ;	==    	D- ,   ;   	=   A- ,   ;   	= http    - ,   ;   	=A5 ,   ;
+	=   A- ,   ;   =   A5 ,   ;
+=   A =
+go.importpath.websocket.  =go.string."websocket" - ,   ;
+==    D- ,   ;==    D- ,   ;   =	   A- ,   ;   = websocke- ,   ;   = t       - ,   ;   =A5 ,   ;
+=   A- ,   ;   
+=	   A5 ,   ;
+
+=   AO      

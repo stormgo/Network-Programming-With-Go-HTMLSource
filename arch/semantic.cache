@@ -1,0 +1,16 @@
+;; Object arch/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "arch/"
+  :tables (list 
+   (semanticdb-table "lecture.html"
+    :major-mode 'html-mode
+    :tags '(("Distributed Systems Architecture" section nil nil [17 142]) ("Architecture" section (:members (("Architecture" section (:members (("Part 1 (Ogg-Vorbis format, 3Mbytes)" section nil nil [240 390]) ("Part 1 (WAV format, 18Mbytes)" section nil nil [390 545]) ("Part 2 (Ogg-Vorbis format, 6Mbytes)" section nil nil [545 695]) ("Part 2 (WAV format, 18Mbytes)" section nil nil [695 852]))) nil [159 852]) ("Protocol Layers" section nil nil [852 1176]) ("ISO OSI Protocol" section nil nil [1176 1230]) ("OSI layers" section nil nil [1230 1737]) ("TCP/IP Protocol" section nil nil [1737 1796]) ("Some Alternative Protocols" section nil nil [1796 1970]) ("Networking" section nil nil [1970 2729]) ("Gateways" section nil nil [2729 3158]) ("Packet encapsulation" section nil nil [3158 3220]) ("Connection Models" section nil nil [3220 3311]) ("Connection oriented" section nil nil [3311 3593]) ("Connectionless" section nil nil [3593 4034]) ("Communications Model" section nil nil [4034 4146]) ("Communications Model (2)" section nil nil [4146 4471]) ("Distributed Computing Models" section nil nil [4471 4599]) ("Client/Server System" section nil nil [4599 4663]) ("Client/Server Application" section nil nil [4663 4737]) ("Server Distribution" section nil nil [4737 4962]) ("Server Distribution (2)" section nil nil [4962 5156]) ("Component Distribution" section nil nil [5156 5291]) ("Example: Distributed Database" section nil nil [5291 5407]) ("Example: Network File Service" section nil nil [5407 5585]) ("Example: Web" section nil nil [5585 5761]) ("Example: Terminal Emulation" section nil nil [5761 5968]) ("Example: Expect" section nil nil [5968 6201]) ("X Window System" section nil nil [6201 6384]) ("Gartner Classification" section nil nil [6384 6448]) ("Three Tier Models" section nil nil [6448 6509]) ("Fat vs thin" section nil nil [6509 6949]) ("Middleware model" section nil nil [6949 7036]) ("Middleware" section nil nil [7036 7343]) ("Middleware examples" section nil nil [7343 7728]) ("Middleware functions" section nil nil [7728 8101]) ("Continuum of Processing" section nil nil [8101 8174]) ("Distribution of Data" section nil nil [8174 8241]) ("Points of Failure" section nil nil [8241 8828]) ("Acceptance Factors" section nil nil [8828 8974]) ("Transparency" section nil nil [8974 9301]) ("References" section nil nil [9301 9304]))) nil [142 147]))
+    :file "lecture.html"
+    :pointmax 9727
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0beta3"
+  :semanticdb-version "2.0beta3"
+  )

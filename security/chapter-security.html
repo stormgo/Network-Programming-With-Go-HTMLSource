@@ -1,0 +1,555 @@
+<!DOCTYPE html lang="en">
+
+<html>
+
+<head>
+<title> Security
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../stylesheet.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+    body { counter-reset: chapter 7; }
+</style>
+
+<script type="text/javascript" src="../toc.js"> 
+   <!-- empty -->
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "http://api.flattr.com/js/0.6/load.js?mode=auto";
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+
+</head>
+
+<body>
+
+<div class="chapter">
+<h1> Security </h1>
+</div>
+
+<div class="preface">
+<p>
+
+</p>
+</div>
+
+<div id="generated-toc" class="generate_from_h2"></div>
+
+<h2>Introduction</h2>
+<p>
+  Although the internet was originally designed as a system to withstand
+  atacks by hostile agents, it developed in a co-operative environment
+  of relatively trusted entities. Alas, those days are long gone.
+  Spam mail, denial of service attacks, phishing attempts and so on
+  are indicative that anyone using the internet does so at their own
+  risk.
+</p>
+
+<p>
+  Applications have to be built to work correctly in
+  hostile situations. "correctly" no longer means just getting
+  the functional aspects of the program correct, but also means
+  ensuring privacy and integrity of data transferred, access
+  only to legitimate users and other issues.
+</p>
+
+<p>
+  This of course makes your programs much more complex. There are
+  <em>difficult</em> and <em>subtle</em> computing problems involved 
+  in making applications secure. Attempts to do it yourself (such as
+  making up your own encryption libraries) are usually doomed
+  to failure. Instead, you need to make use of libraries designed
+  by security professionals
+</p>
+
+<h2> ISO security architecture </h2>
+<p>
+  The ISO OSI (open systems interconnect) seven-layer model of
+  distributed systems is well known and is repeated in this
+  figure: <br/>
+  <img src="iso.gif"/>
+</p>
+
+<p>
+  What is less well known is that ISO built a whole series of
+  documents upon this architecture. For our purposes here, the most
+  important is the ISO Security Architecture model, ISO 7498-2.
+</p>
+
+<h3> Functions and levels </h3>
+
+<p>
+  The principal functions required of a security system are
+  <ul>
+    <li>
+      Authentication - proof of identity
+    </li>
+    <li>
+      Data integrity  - data is not tampered with
+    </li>
+    <li>
+      Confidentiality - data is not exposed to others
+    </li>
+    <li>
+      Notarization/signature
+    </li>
+    <li>
+      Access control
+    </li>
+    <li>
+      Assurance/availability
+    </li>
+  </ul>
+</p>
+
+<p>
+  These are required at the following levels of the OSI stack:
+  <ul>
+    <li>
+      Peer entity authentication (3, 4, 7)
+    </li>
+    <li>
+      Data origin authentication (3, 4, 7)
+    </li>
+    <li>
+      Access control service (3, 4, 7)
+    </li>
+    <li>
+      Connection confidentiality (1, 2, 3, 4, 6, 7)
+    </li>
+    <li>
+      Connectionless confidentiality (1, 2, 3, 4, 6, 7)
+    </li>
+    <li>
+      Selective field confidentiality (6, 7)
+    </li>
+    <li>
+      Traffic flow confidentiality (1, 3, 7)
+    </li>
+    <li>
+      Connection integrity with recovery (4, 7)
+    </li>
+    <li>
+      Connection integrity without recovery (4, 7)
+    </li>
+    <li>
+      Connection integrity selective field (7)
+    </li>
+    <li>
+      Connectionless integrity selective field (7)
+    </li>
+    <li>
+      Non-repudiation at origin (7)
+    </li>
+    <li>
+      Non-repudiation of receipt (7)
+    </li>
+  </ul>
+</p>
+
+<h3>  Mechanisms </h3>
+<p>
+  <ul>
+    <li>
+      Peer entity authentication
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  digital signature
+	<li>
+	  authentication exchange
+      </ul>
+    <li>
+      Data origin authentication
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  digital signature
+      </ul>
+    <li>
+      Access control service
+      <ul>
+	<li>
+	  access control lists
+	<li>
+	  passwords
+	<li>
+	  capabilities lists
+	<li>
+	  labels
+	</li>
+      </ul>  
+      
+    <li>
+      Connection confidentiality
+      <ul>
+	<li>
+	  ecryption
+	<li>
+	  routing control
+      </ul>
+    <li>
+      Connectionless confidelity
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  routing control
+      </ul>
+    <li>
+      Selective field confidelity
+      <ul>
+	<li>
+	  encryption
+      </ul>
+    <li>
+      Traffic flow confidelity
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  traffic padding
+	<li>
+	  routing control
+      </ul>
+
+    <li>
+      Connection integrity with recovery
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  data integrity
+      </ul>
+    <li>
+      Connection integrity without recovery
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  data integrity
+      </ul>
+    <li>
+      Connection integrity selective field
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  data integrity
+      </ul>
+    <li>
+      Connectionless integrity
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  digital signature
+	<li>
+	  data integrity
+      </ul>
+
+    <li>
+      Connectionless integrity selective field
+      <ul>
+	<li>
+	  encryption
+	<li>
+	  digital signature
+	<li>
+	  data integrity
+      </ul>
+    <li>
+      Non-repudiation at origin
+      <ul>
+	<li>
+	  digital signature
+	<li>
+	  data integrity
+	<li>
+	  notarisation
+      </ul>
+    <li>
+      Non-repudiation of receipt
+      <ul>
+	<li>
+	  digital signature
+	<li>
+	  data integrity
+	<li>
+	  notarisation
+      </ul>
+  </ul>
+</p>
+
+<h2> Data integrity </h2>
+<p>
+  Ensuring data integrity means supplying a means of testing that
+  the data has not been tampered with. Usually this is done by
+  forming a simple number out of the bytes in the data. This process
+  is called <em>hashing</em> and the resulting number is called a
+  <em>hash</em> or <em>hash value</em>.
+</p>
+
+<p>
+  A naive hashing algorithm is just to sum up all the bytes in the
+  data. However, this still allows almost any amount of changing the
+  data around and still preserving the hash values. For example,
+  an attacker could just swap two bytes. This preserves the hash value,
+  but could end up with you owing someone $65,536 instead of $256.
+</p>
+
+<p>
+  Hashing algorithms used for security purposes have to be "strong", 
+  so that it is very difficult
+  for an attacker to find a different sequence of bytes with the same
+  hash value. This makes it hard to modify the data to the attacker's
+  purposes. Security researchers are constantly testing hash
+  algorithms to see if they can break them - that is, find a simple
+  way of coming up with byte sequences to match a hash value.
+  They have devised a series of <em>cryptographic</em> hashing
+  algorithms which are believed to be strong.
+</p>
+
+<p>
+  Go has support for several hashing algorithms, including
+  MD4, MD5, RIPEMD-160, SHA1, SHA224, SHA256, SHA384 and SHA512.
+  They all follow the same pattern as far as the Go programmer
+  is concerned: a function <code>New</code> (or similar) in
+  the appropriate package returns a <code>Hash</code> object
+  from the <code>hash</code> package.
+</p>
+
+<p>
+  A <code>Hash</code> has an <code>io.Writer</code>, and you write
+  the data to be hashed to this writer. You can query the number
+  of bytes in the hash value by <code>Size</code> and the hash
+  value by <code>Sum</code>.
+</p>
+
+<p>
+  A typical case is MD5 hashing. This uses the <code>md5</code>
+  package. The hash value is a 16 byte array. This is typically
+  printed out in ASCII form as four hexadecimal numbers, each
+  made of 4 bytes. A simple program is
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . MD5Hash.go" -->
+  which prints "b1946ac9 2492d234 7c6235b4 d2611184"
+</p>
+
+<p>
+  A variation on this is the HMAC (Keyed-Hash Message Authentication Code)
+  which adds a key to the hash algorithm. There is little change in using
+  this. To use MD5 hashing along with a key, replace the call to
+  <code>New</code> by
+  <code>
+    <pre>
+func NewMD5(key []byte) hash.Hash
+    </pre>
+  </code>
+</p>
+
+<h2> Symmetric key encryption </h2>
+<p>
+  There are two major mechanisms used for encrypting data.
+  The first uses a single key that is the same for both
+  encryption and decryption. This key needs to be known to
+  both the encrypting and the decrypting agents. How this
+  key is transmitted between the agents is not discussed.
+</p>
+
+<p>
+  As with hashing, there are many encryption algorithms.
+  Many are now known to have weaknesses, and in general
+  algorithms become weaker over time as computers get
+  faster. Go has support for several symmetric key algorithms
+  such as Blowfish and DES. 
+</p>
+
+<p>
+  The algorithms are <em>block</em> algorithms. That is they
+  work on blocks of data. If you data is not aligned to the
+  block size, then you will have to pad it with extra blanks
+  at the end.
+</p>
+
+<p>
+  Each algorith is represented by a <code>Cipher</code> object.
+  This is created by <code>NewCipher</code> in the appropriate
+  package, and takes the symmetric key as parameter.
+</p>
+
+<p>
+  Once you have a cipher, you can use it to encrypt and decrypt
+  blocks of data. The blocks have to be 8-bit blocks for Blowfish.
+  A program to illustrate this is
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . Blowfish.go" -->
+</p>
+
+<div class="warning">
+<p>
+  Blowfish is not in the Go 1 distribution. Instead it is on the 
+  http://code.google.com/p/ site. You have to install it by running
+  "go get"
+  in a directory where you have source that needs to use it.
+</p>
+</div>
+
+<h2> Public key encryption </h2>
+
+<p>
+Public key encryption and decryption requires <em>two</em> keys:
+one to encrypt and a second one to decrypt. The encryption key
+is usually made public in some way so that anyone can encrypt
+messages to you. The decryption key must stay private, otherwise
+everyon would be able to decrypt those messages! Public key
+systems aer asymmetric, with different keys for different uses.
+</p>
+
+<p>
+There are many public key encryption systems supported by Go.
+A typical one is the RSA scheme.
+</p>
+
+<p>
+  A program generating RSA private and public keys is
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . GenRSAKeys.go" -->
+</p>
+
+<p>
+  The program also saves the certificates using <code>gob</code>
+  serialisation. They can be read back by this program:
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . LoadRSAKeys.go" -->
+</p>
+
+<!--
+<h3> PEM </h3>
+<p>
+
+  <code>
+    <pre>
+var pemPrivateKey = `-----BEGIN RSA PRIVATE KEY-----
+MIIBOgIBAAJBALKZD0nEffqM1ACuak0bijtqE2QrI/KLADv7l3kK3ppMyCuLKoF0
+fd7Ai2KW5ToIwzFofvJcS/STa6HA5gQenRUCAwEAAQJBAIq9amn00aS0h/CrjXqu
+/ThglAXJmZhOMPVn4eiu7/ROixi9sex436MaVeMqSNf7Ex9a8fRNfWss7Sqd9eWu
+RTUCIQDasvGASLqmjeffBNLTXV2A5g4t+kLVCpsEIZAycV5GswIhANEPLmax0ME/
+EO+ZJ79TJKN5yiGBRsv5yvx5UiHxajEXAiAhAol5N4EUyq6I9w1rYdhPMGpLfk7A
+IU2snfRJ6Nq2CQIgFrPsWRCkV+gOYcajD17rEqmuLrdIRexpg8N1DOSXoJ8CIGlS
+tAboUGBxTDq3ZroNism3DaMIbKPyYrAqhKov1h5V
+-----END RSA PRIVATE KEY-----
+`
+
+func bigFromString(s string) *big.Int {
+        ret := new(big.Int)
+        ret.SetString(s, 10)
+        return ret
+}
+
+var rsaPrivateKey = &rsa.PrivateKey{
+        PublicKey: rsa.PublicKey{
+                N: bigFromString("9353930466774385905609975137998169297361893554
+14998671685329502257853572497967725295852446635047121036783518748074826886427746
+4700638583474144061408845077"),
+                E: 65537,
+        },
+        D: bigFromString("726639843132811634405769937974922253227934392381906363
+94970490393898993285385430876577337665541558398345195294398516730148002612857577
+59040931985506583861"),
+        P: bigFromString("989203665480846436017288690555926508355729509322669674
+61790948584315647051443"),
+        Q: bigFromString("945602083088470157474985238840633946716066719049446663
+60068158221458669711639"),
+}
+
+        block, _ := pem.Decode([]byte(pemPrivateKey))
+        priv, err := ParsePKCS1PrivateKey(block.Bytes)
+    </pre>
+  </code>
+</p>
+-->
+
+<h2> X.509 certificates </h2>
+<p>
+  A Public Key Infrastructure (PKI) is a framework for a collection
+  of public keys, along with additional information such as 
+  owner name and location, and links between them giving some
+  sort of approval mechanism.
+</p>
+
+<p>
+  The principal PKI in use today is based on X.509 certificates.
+  For example, web browsers use them to verify the identity
+  of web sites.
+</p>
+
+<p>
+  An example program to generate a self-signed X.509 certificate
+  for my web site and store it in a <code>.cer</code> file is
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . GenX509Cert.go" -->
+</p>
+
+<p>
+  This can then be read back in by
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . LoadX509Cert.go" -->
+</p>
+
+<h2> TLS </h2>
+<p>
+Encryption/decryption schemes are of limited use if you have to do
+all the heavy lifting yourself. The most popular mechanism on the internet
+to give support for encrypted message passing is currently TLS
+(Transport Layer Security) which was formerly SSL 
+(Secure Sockets Layer).</p>
+
+<p>
+In TLS, a client and a server negotiate identity using X.509 certificates.
+One this is complete, a secret key is invented between them, and all
+encryption/decryption is done using this key. The negotiation is
+relatively slow, but once complete a faster private key mechanism is used.
+</p>
+
+
+<p>
+  A server is 
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . TLSEchoServer.go" -->
+</p>
+
+<p>
+  The server works  with the following client: 
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . TLSEchoClient.go" -->
+</p>
+
+<h2> Conclusion </h2>
+<p>
+Security is a huge area in itself, and in this chapter we have barely touched on it.
+However, the major concepts have been covered. What has not been stressed is how
+much security needs to be built into the design phase: security as an afterthought
+is nearly always a failure.
+</p>
+
+<p> 
+<!--#include file="copyright.html" -->
+</p>
+<p>If you like this book, please contribute using Flattr
+<a class="FlattrButton" style="display:none;"
+href="http://jan.newmarch.name/go/index.html"></a>
+<br/> or donate using PayPal
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/WEBSCR-640-20110401-1/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+<img alt="" border="0" src="https://www.paypalobjects.com/WEBSCR-640-20110401-1/en_AU/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</body>

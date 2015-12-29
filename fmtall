@@ -1,0 +1,7 @@
+
+
+for i in */*.go
+do
+	gofmt $i > tmp
+	mv tmp $i
+done

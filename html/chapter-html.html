@@ -1,0 +1,129 @@
+<!DOCTYPE html lang="en">
+
+<html>
+
+<head>
+<title> HTML
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="../stylesheet.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+    body { counter-reset: chapter 11; }
+</style>
+
+<script type="text/javascript" src="../toc.js"> 
+   <!-- empty -->
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    (function() {
+        var s = document.createElement("script"), t = document.getElementsByTagName("script")[0];
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "http://api.flattr.com/js/0.6/load.js?mode=auto";
+        t.parentNode.insertBefore(s, t);
+    })();
+/* ]]> */
+</script>
+
+
+</head>
+
+<body>
+
+<div class="chapter">
+<h1> HTML </h1>
+</div>
+
+<div class="preface">
+<p>
+  The Web was originally created to serve HTML documents.
+  Now it is used to serve all sorts of documents as well as
+  data of dirrent kinds. Nevertheless, HTML is still the main
+  document type delivered over the Web
+  Go has basic mechanisms for parsing HTML documents, which are
+  covered in this chapter
+
+</p>
+</div>
+
+<div id="generated-toc" class="generate_from_h2"></div>
+
+<h2>Introduction</h2>
+<p>
+  The Web was originally created to serve HTML documents.
+  Now it is used to serve all sorts of documents as well as
+  data of dirrent kinds. Nevertheless, HTML is still the main
+  document type delivered over the Web
+</p>
+
+<p>
+  HTML has been through a large number of versions, and HTML 5
+  is currently under development. There have also been many
+  "vendor" versions of HTML, introducing tags that never made
+  it into standards.
+</p>
+
+<p>
+  HTML is simple enough to be edited by hand. Consequently, many
+  HTML documents are "ill formed", not following the syntax of the
+  language. HTML parsers generally are not very strict, and will 
+  accept many "illegal" documents.
+</p>
+
+<p>
+  There wasn't much in earlier versions of Go about handling HTML documents - 
+  basically, just a tokenizer. The incomplete nature of the package has led
+  to its removal for Go 1. It can still be found in the <code>exp</code>
+  (experimental) package if you really need it. No doubt some improved
+  form will become available in a later version of Go, and then it will be
+  added back into this book.
+</p>
+
+<p>
+  There is limited support for HTML in the XML package, discussed in the next chapter.
+</p>
+
+<!--
+
+  Go has basic parsing mechanisms based on a tokeniser.
+  This allows you to process HTML documents as they are read,
+  but if you want to, say, build a parse tree, then you have to do that
+  yourself.
+  The state of this package is currently marked as <em>incomplete</em>
+  so it will change over time.
+
+<h2> Tokenizer </h2>
+<p>
+  The <code>html</code> implements a basic tokenizer that can 
+  used to parse HTML. The following program reads a file of HTML text
+  and prints information about the text tokens and the tags:
+  <!--#exec cmd="/usr/local/bin/dataprogram.pl . ReadHTML.go" -->
+-->
+</p>
+
+<h2> Conclusion </h2>
+<p>
+There isn't anything to this package at present as it is still under development.
+</p>
+
+<p> 
+<!--#include file="copyright.html" -->
+</p>
+<p>If you like this book, please contribute using Flattr
+<a class="FlattrButton" style="display:none;"
+href="http://jan.newmarch.name/go/index.html"></a>
+<br/> or donate using PayPal
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/WEBSCR-640-20110401-1/en_AU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+<img alt="" border="0" src="https://www.paypalobjects.com/WEBSCR-640-20110401-1/en_AU/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</body>
+
+</html>

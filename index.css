@@ -1,0 +1,45 @@
+
+
+body {	counter-reset: section; 
+	counter-reset: chapter;
+	text-align: left;
+}
+
+li {
+	text-align: left;
+}
+
+h1 {
+   font-size: 20pt;
+   font-weight: bold;
+}
+
+div.center {
+        text-align: center;
+}
+
+
+/*
+h1 {	counter-increment: chapter;
+	counter-reset: section;
+	font-size: 14;
+	/* text-align: center; */
+}
+*/
+
+/*
+h2 { 	counter-increment: section; 
+	font-weight: normal;
+	font-size: 12;
+}
+h3 {	font-style: italic; 
+	font-weight: normal;
+	font-size: 10;
+	text-indent: 15;
+}
+
+h1:before  { content: "Chapter " counter(chapter) " "; 
+}
+h2:before  { content: counter(chapter) "." counter(section) " "; }
+h3:before  {content: "   "}
+*/

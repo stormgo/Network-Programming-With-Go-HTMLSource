@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<Person>
+<Name>
+<Family>
+   Newmarch
+</Family>
+<Personal>
+   Jan
+</Personal>
+</Name>
+<Email>
+<Kind>
+   home
+</Kind>
+<Address>
+   jan
+</Address>
+</Email>
+<Email>
+<Kind>
+   work
+</Kind>
+<Address>
+   jan
+</Address>
+</Email>
+</Person>
+

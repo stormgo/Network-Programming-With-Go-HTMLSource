@@ -1,0 +1,58 @@
+<html>
+  <body>
+    <table border="1">
+      <tr>
+	<th>Word</th>
+	<th>Traditional</th>
+	<th>Simplified</th>
+	<th>Pinyin</th>
+	<th>English</th>
+	<th>Choice</th>
+      </tr>
+      <!-- {.repeated section @} -->
+      {{range .}}
+
+      <tr> 
+	{{$word := .Word}}
+	{{$cardName := .CardName}}
+      <!-- {.repeated section Entries} -->
+      {{range .Entries}}
+	<!-- <td>.Word}}</td> -->
+	<td> {{$word}}</td>
+	<td>{{.Traditional}}</td> 
+	<td>{{.Simplified}}</td>
+	<td>{{.Pinyin|pinyin}}</td>
+	<td>
+	  {{range .Translations}}
+	    {{.|html}} 
+	    <br/>
+	  {{end}}
+	</td>
+	<td>
+	  <form method="POST" action="http:/addWord">
+	    <input type="hidden" name="word" value="{{$word}}" />
+	    <input type="hidden" name="simplified" value="{{.Simplified}}" />
+	    <input type="hidden" name="traditional" value="{{.Traditional}}" />
+	    <input type="hidden" name="pinyin" value="{{.Pinyin}}" />
+	    <input type="hidden" name="translations" 
+		   value="[{{range $idx, $elmt := .Translations}}
+			  {{if $idx}}, &quot;{{$elmt}}&quot;
+			  {{else}}  &quot;{{$elmt}}&quot;
+			  {{end}}
+{{end}}]" />
+	    <input type="hidden" name="cardname" value="{{$cardName}}" />
+	    <input type="submit" value="This one" />
+	  </form>
+	</td>
+      </tr>
+
+      {{end}}
+      {{end}}
+    </table>
+
+    <p class ="return">
+      <a href="http:/flashcards.html"> Return to Flash Cards list</a>
+    </p>
+
+  </body>
+</html>

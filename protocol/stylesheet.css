@@ -1,0 +1,19 @@
+
+
+h1 {color: red; background: yellow}
+h2 {color: red; background: blue}
+ 
+code {color: darkblue; font-weight: bold}
+pre  {color: darkblue; font-weight: bold}
+ 
+body {background-color: white}
+body {bgcolor: white}
+P {background: white}
+
+textarea {font-family: monospace; font-weight: bold}
+ 
+
+.interactive_program {background: white}
+.interactive_program {color: green}
+ 
+.list {background: #CCCCFF}

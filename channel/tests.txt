@@ -1,0 +1,104 @@
+
+I ran several tests, some based on the code in netchan_test.go from the Go distro.
+
+The first group are all a single unidirectional channel
+
+1) Exporter sends forever, importer receives at most 10
+Keep repeating receiver.
+Result: sent and received ok, but lots of "error decoding client header: EOF"
+on sending side
+
+2) Exporter sends 5, closes channel and exits, importer tries to read 10, but tests close(channel)
+Result: reader (importer) gets "importer value decode: EOF" and hangs
+Result: behaves as expected, reader gets closed channel after successful reads
+
+
+3) Exporter reads forever, testing for closed channel.
+Importer sends 10 times and exits without closing channel.
+Repeat importer
+Result: As expected reads successfully each time, 
+	but reader (exporter) always gets 
+	"error decoding client header: EOF" and frequently 
+	gets "exporter value decode: EOF"
+
+4) Exporter reads forever, testing for closed channel.
+Importer sends 10 times and exits closing channel.
+Repeat importer
+Result: same as when sender does not close channel!
+	Successful reads  from all importers plus error messages
+	Reader does not report closed channel
+
+The next group use two channels one in each direction
+
+5) importer writes 10 times. exporter in infinite loop send the messages back.
+importer does not close channel on exit.
+exporter tests for closed read channel.
+Result: exporter does not see close. 
+	messages sent okay in both directions,
+	but exporter reader gets "error decoding client header: EOF"
+Result: running the importer again with same exporter gets messages on
+	exporter "error encoding client response: write tcp 127.0.0.1:60070: broken pipe
+2010/09/21 00:05:58 export: write tcp 127.0.0.1:60070: broken pipe"
+	while importer hangs
+
+6) exporter in infinite loop writing and then reading
+importer reads 10 times and echoes back
+neither side closes any channels
+Result:  first importer runs okay, second one hangs after importing channels
+ 
+
+
+--------------------------------------------------------
+Exporte rcloses channel, importer tests for close.
+
+Running it once, ok. Running it again: okay. Running it for the third time, almost immediately:
+"importer value decode: read tcp 127.0.0.1:2345: connection reset by peer"
+The I run it again and get
+"importer value decode: EOF"
+and the receiver hangs.
+
+Exporter reads, importer sends:
+importer closes channel, exporter tests for close.
+ lots of messages on reading side of "error decoding client header: EOF" but reads okay. Can treat messages as spurious, I guess.
+
+
+func importReceive(imp *netchan.Importer) {
+        ch := make(chan int)
+        err := imp.ImportNValues("exportedSend", ch, netchan.Recv, count)
+	checkError(err)
+
+        for i := 0; i < count; i++ {
+                v := <-ch
+                if closed(ch) {
+                        if i != closeCount {
+                                println("expected close at %d; got one at %d\n", closeCount, i)
+                        }
+                        break
+                }
+                if v != 23+i {
+                        println("importReceive: bad value: expected %d; got %+d", 23+i, v)
+                }
+        }
+}
+
+and 
+
+func exportSend(exp *netchan.Exporter, n int) {
+        ch := make(chan int)
+        err := exp.Export("exportedSend", ch, netchan.Send)
+	checkError(err)
+
+        func() {
+                for i := 0; i < n; i++ {
+                        ch <- 23+i
+                }
+                close(ch)
+        }()
+}
+
+Running it once, ok. Running it again: okay. Running it for the third time, almost immediately:
+"importer value decode: read tcp 127.0.0.1:2345: connection reset by peer"
+The I run it again and get
+"importer value decode: EOF"
+and the receiver hangs.
+

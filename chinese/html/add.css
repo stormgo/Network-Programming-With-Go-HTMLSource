@@ -1,0 +1,14 @@
+
+div {
+  width: 600px;
+}
+
+.td {
+    float: left;
+    width: 200px;
+    background:#fcd;
+}
+
+br {
+    clear: left;
+}

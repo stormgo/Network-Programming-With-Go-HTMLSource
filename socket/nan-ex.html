@@ -1,0 +1,21 @@
+Homework
+--------
+
+1.
+Which computers exist on your local network?
+Hint: computers on your local network have
+addresses 169.254.167.?. Use a loop from 1..255
+to check if the addresses 169.254.167.1..169.254.167.255
+exist. Use the InetAddress class
+
+2.
+Write a port scanner. This tries to open a socket
+on every port from 1..65,000. If a service exists,
+the socket can be created. If it cannot, it throws
+an exception. Use the Socket class
+
+3.
+Change the EchoServer so that when a client socket
+is returned from accept(), it prints information
+about the client, by using Socket.getHostAddress()
+Use the ServerSocket and Socket classes

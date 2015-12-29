@@ -1,0 +1,16 @@
+#!/bin/sh
+
+idx=1
+while [ -f test$idx ]
+do
+   bash test$idx > /tmp/test$$
+   if cmp result$idx /tmp/test$$ > /dev/null 2> /dev/null
+   then
+      echo Test $idx passed
+   else
+      echo Test $idx failed
+      cat /tmp/test$$
+   fi
+   rm /tmp/test$$
+   idx=`expr $idx + 1`
+done

@@ -1,0 +1,4 @@
+The name is {{.Name}}.
+{{range .Emails}}
+        An email is "{{. | emailExpand}}"
+{{end}}

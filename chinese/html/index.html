@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>
+      Chinese-English translator
+    </title>
+  </head>
+  <body>
+
+    <h1>
+      Chinese-English Dictionary
+    </h1>
+
+
+    <form method=form action="http://wordlook" name="lookup">
+      <table>
+
+	<TR>
+	  <TD NOWRAP ALIGN=CENTER>
+	    Search <INPUT TYPE="text" maxlength=30 name="word"> as
+	    <SELECT NAME="searchtype">
+	      <OPTION VALUE="chinese">Chinese (Trad. or Simp)
+	      <OPTION VALUE="simp">Simp. Chinese
+	      <OPTION VALUE="trad">Trad. Chinese
+	      <OPTION VALUE="pinyin">Pinyin
+	      <OPTION VALUE="english">English
+	    </SELECT>
+	  </TD>
+	</TR>
+	<TR>
+	  <td align="center"> Match 
+	    
+	    <SELECT NAME="where">
+	      <OPTION VALUE="whole">as whole dictionary field
+	      <OPTION VALUE="start">at start of dictionary field
+	      <OPTION VALUE="end">at end of dictionary field
+	      <OPTION VALUE="anywhere">anywhere in dictionary field
+	    </SELECT>.<BR>
+	    <INPUT type="checkbox" name="output" value="gif">Display Chinese using GIFs
+	    <BR><INPUT type="checkbox" name="audio" value="on" checked>Include pronunciation links
+	  </TD>
+	</TR>
+	<TR>
+	  <TD ALIGN="CENTER">
+	    <INPUT TYPE="submit" VALUE="Look It Up!">
+	  </TD>
+	</TR>
+      </table>
+      
+    </form>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+../LookupPort tcp telnet

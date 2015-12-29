@@ -1,0 +1,88 @@
+<html>
+
+<head>
+<title>IPv6
+</title>
+<!--#exec cmd="/usr/local/bin/meta.pl" -->
+<link href="../stylesheet.css" rel="stylesheet"> 
+</head>
+
+<body>
+
+<h1 align="center">Java and IPv6</h1>
+
+<table border="1">
+<tr>
+  <td>
+      <a href="../audio/ipvp6.ogg">
+      <img src="../audio/speak.png" align="center"> (Ogg-Vorbis format, 5Mbytes)
+      </a>
+  </td>
+  <td>
+      <a href="../audio/ipv6.wav">
+      <img src="../audio/speak.png" align="center"> (WAV format, 26Mbytes)
+      </a>
+  </td>
+</tr>
+</table>
+</center>
+
+
+<h1> Inet6Address </h1>
+
+<p>
+The class <code>java.net.InetAddress</code> has two subclasses
+<ul>
+  <li>
+      <code> java.net.Inet4Address </code>
+  </li>
+  <li>
+      <code> java.net.Inet6Address </code>
+  </li>
+</ul>
+These cannot be instantiated directly, but are obtained from the
+"factory" methods such as
+<pre><code>
+InetAddress.getByName(...)
+</code></pre>
+If your network stack is configured to use IPv6, you get an
+<code> Inet6Address </code>, otherwise you get an
+<code> Inet4Address </code>.
+</p>
+
+<p>
+You can check if you have an IPv6 address by
+<pre><code>
+if (address instanceof Inet6Address) ...
+</code></pre>
+You can check if a socket uses IPv6 by
+<pre><code>
+if (socket.getLocalAddress() instanceof Inet6Address) ...
+</code></pre>
+</p>
+
+<h1>LocalHost</h1>
+
+<p>
+The IPv4 <code>localhost</code> is 127.0.0.1.
+The IPv6 <code>localhost</code> is 0:0:0:0:0:0:0:1
+</p>
+
+<h1> Other </h1>
+
+<p>
+There are methods to tell if an IPv6 address is compatable
+with an IPv4 address, and some properties that can be set
+to tell the JVM to prefer IPv4 or IPv6.
+Apart from that, there appears to be little that Java gives
+you.
+</p>
+
+<hr>
+<address><a href="http://jan.newmarch.name/">Jan Newmarch &lt;jan@newmarch.name&gt;</a></address>
+<!-- hhmts start -->
+Last modified: Mon Aug 15 12:14:45 EST 2005
+<!-- hhmts end -->
+<!--#include virtual="../copyright" --></body> </html>
+
+

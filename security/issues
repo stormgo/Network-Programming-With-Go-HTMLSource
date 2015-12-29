@@ -1,0 +1,10 @@
+In TLSEchoServer:
+
+In server cert:
+	if Time left out, panic
+	if Rand left out, hangs
+
+Doc for tls.LoadX509KeyPair should say the certs have to be PEM encoded
+
+c.sendAlert(alertBadCertificate)) occurs 8 times in handshake_client.go.
+A detail field of which error caused the BadCert would help debugging.

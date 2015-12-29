@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for i in */chapter*html
+do
+	sed 's/Copyright.* Jan Newmarch.*/\<\!--\#include file="copyright.html" --\>/' $i > tmp
+	cp $i $i.bak
+	cp tmp $i
+done

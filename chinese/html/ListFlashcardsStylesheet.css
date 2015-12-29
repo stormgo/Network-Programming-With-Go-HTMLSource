@@ -1,0 +1,65 @@
+
+#choose {
+    background: #CCC;
+}
+
+#sets {
+    float: left;
+    width: 50%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#options {
+/*
+    float: right;
+    display: inline;
+*/
+    margin-right: 20px;
+}
+
+#order {
+    float: right;
+}
+
+#half {
+    float: right;
+}
+
+#submit {
+    clear: both;
+    margin-top: 30px;
+    padding-left: 20%;
+    padding-right: 20%;
+    display: block;
+}
+
+
+#new {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+table {
+    display: inline-table;
+    background: #CFF;
+    margin-top: 30px;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    margin-left: 30%;
+ 
+}
+
+button {
+    width: 200px;
+    margin-bottom: 30px;
+}
+
+input {
+
+}

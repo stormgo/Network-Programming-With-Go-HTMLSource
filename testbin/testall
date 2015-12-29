@@ -1,0 +1,12 @@
+#!/bin/sh
+
+ROOT=/var/www/go
+export PATH=$ROOT:$PATH
+
+for i in $*
+do
+   echo Testing in $i
+   echo ----------------------
+   cd $ROOT/$i/tests
+   $ROOT/testbin/testdir
+done

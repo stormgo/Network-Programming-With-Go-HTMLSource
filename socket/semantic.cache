@@ -1,0 +1,23 @@
+;; Object socket/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "socket/"
+  :tables (list 
+   (semanticdb-table "lecture.html"
+    :major-mode 'html-helper-mode
+    :tags '(("Java Sockets" section nil nil [16 147]) ("Socket-level Programming" section (:members (("Socket-level Programming" section (:members (("Part 1 (Ogg-Vorbis format, 8Mbytes)" section nil nil [260 411]) ("Part 1 (WAV format, 43Mbytes)" section nil nil [411 567]) ("Part 2 (Ogg-Vorbis format, 3Mbytes)" section nil nil [567 718]) ("Part 2 (WAV format, 14Mbytes)" section nil nil [718 877]))) nil [173 877]) ("TCP/IP" section nil nil [877 1383]) ("TCP/IP stack" section (:members (("IP datagrams" section nil nil [1591 2134]) ("UDP" section nil nil [2134 2343]) ("TCP" section nil nil [2343 2524]))) nil [1383 2524]) ("Internet adddresses" section (:members (("Network address" section nil nil [2892 3254]) ("Subnet address" section nil nil [3254 3567]) ("Host address" section nil nil [3567 3710]) ("Total address" section nil nil [3710 3918]) ("Special IP addresses" section nil nil [3918 4475]) ("Symbolic names" section nil nil [4475 4836]) ("Programming interface" section (:members (("Client Server Computing - sockets" section nil nil [5024 5145]))) nil [4836 5145]) ("InetAddress" section nil nil [5145 6478]))) nil [2524 6478]) ("Port addresses" section nil nil [6478 7277]) ("Sockets" section nil nil [7277 7762]) ("Connection oriented (TCP)" section (:members (("Client" section nil nil [8182 8358]) ("TCP time client" section nil nil [8358 9272]) ("Server" section nil nil [9272 9608]) ("Echo Server" section nil nil [9608 13186]) ("Multithreaded Echo Server" section nil nil [13186 13916]) ("Timeout" section nil nil [13916 14565]) ("Staying alive" section nil nil [14565 14740]))) nil [7762 14740]) ("Connectionless (UDP)" section nil nil [14740 15156]) ("Time client (UDP)" section nil nil [15156 15994]) ("UDP Time Server" section (:members (("Server listening on multiple sockets" section nil nil [16579 17224]))) nil [15994 17224]) ("Multicast" section (:members (("Overview" section nil nil [17246 18394]) ("Java Multicast sockets" section nil nil [18394 18564]) ("Java Multicast client" section nil nil [18564 19913]) ("Java Multicast server" section (:members (("Jan Newmarch &lt;jan.newmarch@infotech.monash.edu.au&gt;" section nil nil [21268 21271]))) nil [19913 19916]))) nil [17224 17227]))) nil [147 153]))
+    :file "lecture.html"
+    :pointmax 21485
+    :unmatched-syntax 'nil
+    )
+   (semanticdb-table "ipv6.html"
+    :major-mode 'html-helper-mode
+    :tags '(("IPv6" section nil nil [16 139]) ("Java and IPv6" section (:members (("Java and IPv6" section (:members (("(Ogg-Vorbis format, 5Mbytes)" section nil nil [223 366]) ("(WAV format, 26Mbytes)" section nil nil [366 516]))) nil [147 516]) ("Inet6Address" section nil nil [516 1269]) ("LocalHost" section nil nil [1269 1396]) ("Other" section (:members (("Jan Newmarch &lt;jan.newmarch@infotech.monash.edu.au&gt;" section nil nil [1660 1663]))) nil [1396 1399]))) nil [139 144]))
+    :file "ipv6.html"
+    :pointmax 1877
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0beta3"
+  :semanticdb-version "2.0beta3"
+  )

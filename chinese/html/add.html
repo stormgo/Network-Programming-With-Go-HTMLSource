@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>
+      Flashcards word lookup
+    </title>
+  </head>
+
+<link type="text/css" rel="stylesheet"
+         href="/html/add.css">
+</link>
+
+  <body>
+
+    <h1>
+      Flashcards word lookup
+    </h1>
+    <p>
+      Add a card to flashcards {{.Name}}
+
+    <form method="GET" action="http:/searchWord" name="lookup">
+      <input type="hidden" name="cardname" value="{{.Name}}" />
+      <table>
+
+	<TR>
+	  <TD NOWRAP ALIGN=CENTER>
+	    Search <INPUT TYPE="text" maxlength=30 name="word" id="text">
+	    <script  type="text/javascript" 
+		     language="JavaScript1.2" >
+	      document.getElementById("text").focus();
+	    </script>
+
+	    as
+	    <SELECT NAME="searchtype">
+	      <OPTION VALUE="english">English
+	      <OPTION VALUE="pinyin">Pinyin
+	    </SELECT>
+	  </TD>
+	</TR>
+
+	<TR>
+	  <TD ALIGN="CENTER">
+	    <INPUT TYPE="submit" VALUE="Look It Up!">
+	  </TD>
+	</TR>
+      </table>
+      
+    </form>
+    <h2>
+      Current words  
+    </h2>
+
+    <div>
+        {{range .Cards}}
+	    <div class="td"> {{.English}} </div>
+	{{end}}
+    </div>
+    <br />
+    <p class ="return">
+      <a href="http:/flashcards.html"> Return to Flash Cards list</a>
+    </p>
+    <p>
+      <a href="http://www.mandarintools.com/worddict.html">
+	Full Chinese-English dictionary
+      </a>
+    </p>
+  </body>
+</html>

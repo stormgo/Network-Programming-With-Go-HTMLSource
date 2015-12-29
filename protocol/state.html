@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Draft//EN">
+<html> <head>
+<title>State</title>
+
+<link href="../stylesheet.css" rel="stylesheet" type="text/css">
+<meta name="copyright" content="&copy;Jan Newmarch ">
+
+
+<!--#exec cmd="/usr/local/bin/meta.pl" -->
+</head>
+
+<body>
+<center>
+<h1>State</h1>
+</center>
+
+<tr>
+  <td>
+      <a href="../audio/state.ogg">
+      <img src="../audio/speak.png" align="center"> Ogg-Vorbis format, 8Mbytes
+      </a>
+  </td>
+  <td>
+      <a href="../audio/state.mp3">
+      <img src="../audio/speak.png" align="center"> MP3, 8Mbytes
+      </a>
+  </td>
+  <td>
+      <a href="../audio/state.wav">
+      <img src="../audio/speak.png" align="center"> WAV format, 85Mbytes
+      </a>
+  </td>
+</tr>
+
+<h1> Introduction </h1>
+
+<p>
+Applications often make use of state information to simplify what is going
+on. For example
+<UL>
+<LI>
+Keeping file pointers to current file location
+<LI>
+Keeping current mouse position
+<LI>
+Keeping current customer value.
+</UL>
+In a distributed system, such state information may be kept in the client,
+in the server, or in both.
+ 
+ <P>
+The important point is to whether one process is keeping state information
+about <I>itself</I> or about the <I>other</I> process. One process may keep
+as much state information about itself as it wants, without causing any
+problems. If it needs to keep information about the state of the other
+process, then problems arise: the process' actual knowledge of the state
+of the other may become incorrect. This can be caused by loss of messages
+(in UDP), by failure to update, or by s/w errors.
+</p>
+ 
+ <P>
+An example is reading a file. In single process applications the file
+handling code runs as part of the application. It maintains a table of
+open files and the location in each of them. Each time a read or write is done
+this file location is updated. In the DCE file system, the file server
+keeps track of a client's open files, and where the client's file pointer
+is. If a message could get lost (but DCE uses TCP) these could get
+out of synch. If the client crashes, the server must eventually timeout
+on the client's file tables and remove them.
+
+<center>
+<img src="dce.png">
+</center>
+
+In NFS, the server does
+not maintain this state. The client does.
+Each file access from the client that reaches the server must open the
+file at the appropriate point, as given by the client, to perform the
+action.
+<center>
+<img src="nfs.png">
+</center>
+
+ 
+<P>
+If the server maintains information about the client, then it must be
+able to recover if the client crashes. If information is not saved,
+then on each transaction the client must transfer sufficient information
+for the server to function.
+ 
+ <P>
+If the connection is unreliable, then additional handling must be in
+place to ensure that the two do not get out of synch. The classic example
+is of bank account transactions where the messages get lost.
+A transaction server may need to be part of the client-server system.
+
+<h1> Application State Transition Diagram </h1>
+
+<p>
+A state transition diagram keeps track of the current state of an
+application and the changes that move it to new states.
+</p>
+
+<p>
+Example: file transfer with login:
+<center>
+<img src="app.png">
+</center>
+</p>
+
+<p>
+This can also be expressed as a table
+<center>
+<table border="1">
+  <tr> <th> Current state <th> Transition <th> Next state
+  </tr>
+  <tr> <td rowspan="2"> login         <td> login failed <td> login
+  <tr>                                <td> login succeeded <td> file transfer
+  </tr>
+  <tr> <td rowspan="3"> file transfer <td> dir             <td> file transfer
+  <tr>                                <td> get             <td> file transfer
+  <tr>	                	      <td> quit            <td> quit
+  <tr>	                	      <td> logout            <td> login
+  </tr>
+</table>
+</center>
+</p>
+
+<h2> Client state transition diagrams </h2>
+
+<p>
+The client state diagram must follow the application diagram.
+It has more detail though: it <em>writes</em> and then <em>reads</em>
+</p>
+
+<p>
+
+<center>
+<table border="1">
+  <tr> <th> Current state <th> Write <th> Read <th> Next state
+  </tr>
+  <tr> <td rowspan="2"> login
+       <td rowspan="2"> LOGIN name password
+                        <td> FAILED    <td> login
+  <tr>                  <td> SUCCEEDED <td> file transfer
+  </tr>
+  <tr> <td rowspan="7"> file transfer
+              <td rowspan="2"> CD dir
+                        <td> SUCCEEDED       <td> file transfer
+  </tr>
+  <tr>			<td> FAILED          <td> file transfer
+  </tr>
+  <tr>        <td rowspan="2"> GET filename
+                        <td> #lines + contents   <td> file transfer
+  </tr>
+  <tr>			<td> ERROR              <td> file transfer
+  </tr>
+  <tr>        <td rowspan="2"> DIR
+                        <td> #files + filenames <td> file transfer
+  </tr>
+  <tr>			<td> ERROR              <td> file transfer
+  </tr>
+  <tr>	      <td>             quit
+                        <td> none <td> quit
+  </tr>
+    <tr>	      <td>             logout
+                        <td> none <td> login
+  </tr>
+
+</table>
+</center>
+</p>
+
+
+<h2> Server state transition diagrams </h2>
+
+<p>
+The server state diagram must also follow the application diagram.
+It also has more detail: it <em>reads</em> and then <em>writes</em>
+</p>
+
+<p>
+<center>
+<table border="1">
+  <tr> <th> Current state <th> Read <th> Write <th> Next state
+  </tr>
+  <tr> <td rowspan="2"> login
+       <td rowspan="2"> LOGIN name password
+                        <td> FAILED    <td> login
+  <tr>                  <td> SUCCEEDED <td> file transfer
+  </tr>
+  <tr> <td rowspan="7"> file transfer
+              <td rowspan="2"> CD dir
+                        <td> SUCCEEDED       <td> file transfer
+  </tr>
+  <tr>			<td> FAILED          <td> file transfer
+  </tr>
+  <tr>        <td rowspan="2"> GET filename
+                        <td> #lines + contents   <td> file transfer
+  </tr>
+  <tr>			<td> ERROR              <td> file transfer
+  </tr>
+  <tr>        <td rowspan="2"> DIR
+                        <td> #files + filenames <td> file transfer
+  </tr>
+  <tr>			<td> ERROR              <td> file transfer
+  </tr>
+  <tr>	      <td>             quit
+                        <td> none <td> quit
+  </tr>
+  <tr>	      <td>             logout
+                        <td> none <td> login
+  </tr>
+</table>
+</center>
+</p>
+
+<h2> Server pseudocode </h2>
+
+<p>
+<code><pre>
+state = login
+while true
+    read line
+    switch (state)
+        case login:
+            get NAME from line
+            get PASSWORD from line
+            if NAME and PASSWORD verified
+                write SUCCEEDED
+                state = file_transfer
+            else
+                write FAILED
+                state = login
+        case file_transfer:
+            if line.startsWith CD
+                get DIR from line
+                if chdir DIR okay
+                    write SUCCEEDED
+                    state = file_transfer
+                else
+                    write FAILED
+                    state = file_transfer
+            ...
+</pre></code>
+</p>
+<hr>
+<address>Jan Newmarch <a
+href="http://jan.newmarch.name/">(http://jan.newmarch.name)</a></address>
+<a href="mailto:jan@newmarch.name">jan@newmarch.name</a><br>
+<!-- hhmts start -->
+Last modified: Mon Aug 15 12:15:39 EST 2005
+<!-- hhmts end -->
+<br>Copyright &copy;Jan Newmarch<!--#include virtual="../copyright" --></body> </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
